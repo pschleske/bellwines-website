@@ -24,7 +24,7 @@ app.use(session(
 ));
 
 // destructure handler/controller functions
-const { getAllUsers } = handlerFunctions
+const { allUsers, allPets, addPet, removePet } = handlerFunctions
 const { register, login, checkUser, logout } = authCtrl
 
 //set up authentication endpoints 
@@ -35,8 +35,11 @@ app.post('/api/logout', logout)
 
 
 // set up other ROUTES / ENDPOINTS 
-app.get('/api/users', getAllUsers)
-app.get('/api/pets',)
+app.get('/api/users', allUsers)
+
+app.get('/api/pets', allPets)
+app.post('/api/newPet', addPet)
+app.delete('/api/pet/:id', removePet)
 
 
 // open up server 

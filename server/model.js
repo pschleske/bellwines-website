@@ -60,6 +60,9 @@ Pet.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
+        // imgUrl: {
+        //     type: DataTypes.STRING,
+        // },
         description: {
             type: DataTypes.STRING,
         },
