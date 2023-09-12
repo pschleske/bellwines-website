@@ -18,21 +18,25 @@ app.use(session(
         saveUninitialized: true,
         resave: false,
         cookie: {
-            maxAge: 1000 * 60 //* 60 * 48
+            maxAge: 1000 * 60 * 60 * 48
         }
     }
 ));
 
 // destructure handler/controller functions
 const { getAllUsers } = handlerFunctions
-const { register } = authCtrl
+const { register, login, checkUser, logout } = authCtrl
 
 //set up authentication endpoints 
 app.post('/api/register', register)
+app.post('/api/login', login)
+//app.post(checkUser)
+app.post('/api/logout', logout)
 
 
 // set up other ROUTES / ENDPOINTS 
 app.get('/api/users', getAllUsers)
+app.get('/api/pets',)
 
 
 // open up server 

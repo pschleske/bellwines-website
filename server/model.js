@@ -32,7 +32,7 @@ User.init(
         },
         hashedPass: {
             type: DataTypes.STRING(500),
-            // allowNull: false,
+            allowNull: false,
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,

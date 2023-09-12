@@ -29,5 +29,33 @@ export default {
             console.log(err)
             res.status(500).send('Something went wront trying to register')
         }
+    },
+
+    login: async (req, res) => {
+        console.log('hit Login')
+        const { email, password } = req.body;
+        const user = await User.findOne({
+            where: { email: email }
+        });
+        if (user && bcrypt.compare(password, user.hashedPass)) {
+            req.session.userId = user.userId;
+            res.status(200).send(req.session.user)
+        } else {
+            res.json({ success: false })
+        }
+    },
+
+    checkUser: async (req, res) => {
+        console.log('hit checkUser')
+    },
+
+    logout: async (req, res) => {
+        console.log('hit logout')
+        if (!req.session.userId) {
+            res.status(401).send('Unauthorized!')
+        } else {
+            req.session.destroy();
+            res.json({ success: true })
+        }
     }
 }
