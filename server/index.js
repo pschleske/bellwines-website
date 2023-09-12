@@ -1,7 +1,8 @@
 import express from "express";
 import ViteExpress from 'vite-express';
 import session from 'express-session';
-import handlerFunctions from "./controller.js";
+import handlerFunctions from "./controller/routesCtrl.js";
+import authCtrl from "./controller/authCtrl.js"
 
 // set up instance
 const app = express();
@@ -14,14 +15,25 @@ app.use(express.json());
 app.use(session(
     {
         secret: 'codeallday',
-        saveUninitialized: false,
-        resave: false
+        saveUninitialized: true,
+        resave: false,
+        cookie: {
+            maxAge: 1000 * 60 //* 60 * 48
+        }
     }
 ));
 
+// destructure handler/controller functions
 const { getAllUsers } = handlerFunctions
-// set up ROUTES / ENDPOINTS 
+const { register } = authCtrl
+
+//set up authentication endpoints 
+app.post('/api/register', register)
+
+
+// set up other ROUTES / ENDPOINTS 
 app.get('/api/users', getAllUsers)
+
 
 // open up server 
 ViteExpress.listen(app, PORT, () => console.log(`Ready for you on port ${PORT}!!! Head over to http://localhost:${PORT}`))
