@@ -6,7 +6,7 @@ async function connectToDB(dbURI) {
     const sequelize = new Sequelize(dbURI, {
         logging: console.log, //set logging: false to disable outputting SQL queries to console
         define: {
-            timestamps: false, //don't want created_at or updated_at columns
+            timestamps: true, // false if you don't want created_at or updated_at columns
             underscored: true, //use snake_casing rather than camelCase column names
         },
     });

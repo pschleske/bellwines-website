@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize";
+import { DataTypes, Model } from "sequelize";
 import url from 'url';
 import connectToDB from "./db.js";
 import util from "util";
@@ -93,16 +93,16 @@ MaintenanceRequest.init(
         status: {
             type: DataTypes.STRING,
         },
-        dateCreated: {
-            type: DataTypes.DATE
-        },
-        dateClosed: {
-            type: DataTypes.DATE,
-        },
+        // dateCreated: {
+        //     type: DataTypes.DATE
+        // },
+        // dateClosed: {
+        //     type: DataTypes.DATE,
+        // },
     },
     {
         modelName: "maintenanceRequest",
-        sequelize: db
+        sequelize: db,
     }
 )
 
@@ -132,9 +132,9 @@ Message.init(
             allowNull: false,
             unique: true,
         },
-        dateCreated: {
-            type: DataTypes.DATE,
-        },
+        // dateCreated: {
+        //     type: DataTypes.DATE,
+        // },
     },
     {
         modelName: "message",
@@ -154,16 +154,17 @@ Message.belongsTo(User, { foreignKey: 'senderId' })
 User.hasMany(Message, { foreignKey: 'recipientId', as: 'receivedMessage' })
 Message.belongsTo(User, { foreignKey: 'recipientId' })
 
-if (require.main === module) {
-    console.log('Syncing to database...');
-    await db.sync();
-    console.log('Finished syncing database!');
-}
-// if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
-//     console.log("Syncing to database...")
-//     await db.sync()
-//     console.log("Finished syncing database!")
+// if (require.main === module) {
+//     console.log('Syncing to database...');
+//     await db.sync();
+//     console.log('Finished syncing database!');
 // }
+
+if (process.argv[1] === url.fileURLToPath(import.meta.url)) {
+    console.log("Syncing to database...")
+    await db.sync()
+    console.log("Finished syncing database!")
+}
 
 //exports here
 export { User, Pet, MaintenanceRequest, Message }
