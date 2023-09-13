@@ -59,6 +59,25 @@ const maintenanceFunctions = {
             console.error('Error updating request:', error)
             res.status(500).json({ success: false, message: 'Internal server error' })
         }
+    },
+
+    removeRequest: async (req, res) => {
+        try {
+            console.log('hit removeRequest')
+            const { id } = req.params
+
+            const deletedRequest = MaintenanceRequest.destroy({
+                where: { requestId: id }
+            });
+            if (deletedRequest) {
+                res.status(200).json({ success: true, message: 'Request deleted successfully!' })
+            } else {
+                res.status(500).json({ success: false, message: 'Request not found' })
+            }
+        } catch (error) {
+            console.error('There was a problem deleting your request', error)
+            res.status(500).json({ success: false, message: 'Internal Server Error' })
+        }
     }
 }
 

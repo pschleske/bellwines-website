@@ -68,5 +68,14 @@ export default {
             req.session.destroy();
             res.json({ success: true })
         }
+    },
+
+    isAdmin: async (req, res) => {
+        try {
+            console.log('hit isAdmin')
+        } catch (error) {
+            console.log(error)
+            res.status(401).send('Unauthorized user')
+        }
     }
 }

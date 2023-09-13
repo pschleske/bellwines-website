@@ -37,9 +37,9 @@ const requireLogin = (req, res, next) => {
 }
 
 // destructure handler/controller functions
-const { allUsers, register, login, checkUser, logout } = authCtrl;
+const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
 const { allPets, addPet, removePet, updatePet } = petCtrl;
-const { allRequests, addRequest, updateRequest } = maintenanceCtrl;
+const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
 
 //set up usersAll and authentication endpoints 
 app.get('/api/users', allUsers)
@@ -59,6 +59,10 @@ app.put('/api/edit-pet/:id', requireLogin, updatePet)
 app.get('/api/requests', allRequests)
 app.post('/api/new-request', addRequest)
 app.put('/api/edit-request/:id', updateRequest)
+app.delete('/api/request/:id', removeRequest)
+
+//admin routes
+app.get('/api/admin', isAdmin)
 
 //Message routes below  
 
