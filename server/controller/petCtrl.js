@@ -1,17 +1,6 @@
-import { User, Pet, MaintenanceRequest, Message } from '../model.js';
+import { Pet, Message } from '../model.js';
 
-const handlerFunctions = {
-    allUsers: async (req, res) => {
-        try {
-            console.log("hit getAllUsers")
-            const users = await User.findAll()
-            res.status(200).send(users)
-        } catch (err) {
-            console.log(err)
-            res.status(500).send("Something went wrong!")
-        }
-    },
-
+const petFunctions = {
     allPets: async (req, res) => {
         try {
             console.log('hit getAllPets')
@@ -26,16 +15,16 @@ const handlerFunctions = {
     addPet: async (req, res) => {
         try {
             console.log('hit addPet')
-            const { name, description } = req.body;
-            // const { userId } = req.session;
+            const { name, imgUrl, description } = req.body;
+            const { userId } = req.session;
 
             const petCard = await Pet.create({
                 name,
-                // imgUrl,
-                description
-                // userId
+                imgUrl,
+                description,
+                userId
             });
-            res.status(201).json(petCard)
+            res.status(201).send(petCard)
         } catch (err) {
             console.log(err)
             res.status(500).send("Oops! something's not right on the server side :( ")
@@ -59,7 +48,34 @@ const handlerFunctions = {
             console.error('Error deleting pet:', error)
             res.status(500).json({ success: false, message: 'Internal Server Error' })
         }
+    },
+
+    updatePet: async (req, res) => {
+        console.log('hit updatePet!')
+        try {
+            const { id } = req.params;
+            const { name, imgUrl, description } = req.body;
+
+            const [updatedRowsCount] = await Pet.update({
+                name,
+                imgUrl,
+                description
+            },
+                {
+                    where: { petId: id }
+                }
+            );
+            if (updatedRowsCount === 0) {
+                res.status(404).json({ success: false, message: 'Pet not found' })
+            } else {
+                const updatePetCard = await Pet.findByPk(id);
+                res.status(200).json({ success: true, updatePetCard })
+            }
+        } catch (error) {
+            console.error('Error trying to update pet:', error)
+            res.status(500).json({ success: false, message: 'Internal Server Error' })
+        }
     }
 }
 
-export default handlerFunctions
+export default petFunctions;

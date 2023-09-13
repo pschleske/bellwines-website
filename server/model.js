@@ -32,7 +32,7 @@ User.init(
         },
         hashedPass: {
             type: DataTypes.STRING(500),
-            allowNull: false,
+            // allowNull: false,
         },
         isAdmin: {
             type: DataTypes.BOOLEAN,
@@ -60,9 +60,9 @@ Pet.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        // imgUrl: {
-        //     type: DataTypes.STRING,
-        // },
+        imgUrl: {
+            type: DataTypes.STRING,
+        },
         description: {
             type: DataTypes.STRING,
         },

@@ -1,0 +1,65 @@
+import { MaintenanceRequest } from '../model.js'
+
+const maintenanceFunctions = {
+    allRequests: async (req, res) => {
+        try {
+            console.log('hit allRequests')
+            const requests = await MaintenanceRequest.findAll()
+            res.status(200).send(requests)
+        } catch (error) {
+            res.status(500).send('Something went wrong!')
+        }
+    },
+
+    addRequest: async (req, res) => {
+        try {
+            console.log('hit addRequests')
+            const { description } = req.body;
+            const { userId } = req.session;
+
+            const requestRow = await MaintenanceRequest.create({
+                description
+            })
+            res.status(200).send(requestRow)
+        } catch (error) {
+            console.error('Error adding request:', error);
+            res.status(500).json({ error: "Internal Server Error" })
+        }
+    },
+
+    updateRequest: async (req, res) => {
+        try {
+            console.log('hit updateRequest')
+            const { userId } = req.session;
+            const { id } = req.params;
+            const { description } = req.body;
+
+            const request = await MaintenanceRequest.findByPk(id);
+            if (!request) {
+                return res.status(404).json({ success: false, message: 'Maintenance request not found' });
+            }
+            request.description = description;
+            await request.save();
+
+            res.status(200).json({ success: true, message: 'Maintenance request updated successfully' });
+            // const [updatedRequestRow] = await MaintenanceRequest.update({
+            //     description,
+            // },
+            //     {
+            //         where: { requestId: id }
+            //     }
+            // );
+            // if (updatedRequestRow === 0) {
+            //     res.status(404).json({ success: false, message: 'Request not found' })
+            // } else {
+            //     const updatedRequest = await Pet.findByPk(id);
+            //     res.status(200).json({ success: true, updateRequest })
+            // }
+        } catch (error) {
+            console.error('Error updating request:', error)
+            res.status(500).json({ success: false, message: 'Internal server error' })
+        }
+    }
+}
+
+export default maintenanceFunctions;

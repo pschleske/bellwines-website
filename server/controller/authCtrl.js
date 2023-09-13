@@ -2,6 +2,17 @@ import { User } from '../model.js';
 import bcrypt from "bcryptjs";
 
 export default {
+    allUsers: async (req, res) => {
+        try {
+            console.log("hit getAllUsers")
+            const users = await User.findAll()
+            res.status(200).send(users)
+        } catch (err) {
+            console.log(err)
+            res.status(500).send("Something went wrong!")
+        }
+    },
+
     register: async (req, res) => {
         console.log('hit Register')
         try {
