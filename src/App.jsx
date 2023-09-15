@@ -10,21 +10,23 @@ import { Directory } from './Pages/Directory';
 import { Pets } from './Pages/Pets';
 import { Requests } from './Pages/Requests';
 // import { Home } from './Pages/Home';
-// import { AuthProvider } from './shared/contexts/useAuth'
+import { AuthProvider } from './shared/contexts/useAuth'
 
 function App() {
 
   return (
     <>
-      <Header />
-      <Routes>
-        <Route index element={<Landing />} />
-        <Route path='/' />
-        <Route path='/directory' element={<Directory />}
-        />
-        <Route path='/pets' element={<Pets />} />
-        <Route path='/requests' element={<Requests />} />
-      </Routes>
+      <AuthProvider>
+        <Header />
+        <Routes>
+          <Route index element={<Landing />} />
+          <Route path='/' />
+          <Route path='/directory' element={<Directory />}
+          />
+          <Route path='/pets' element={<Pets />} />
+          <Route path='/requests' element={<Requests />} />
+        </Routes>
+      </AuthProvider>
     </>
   )
 }

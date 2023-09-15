@@ -10,6 +10,11 @@ const app = express();
 
 const PORT = 4545;
 
+// destructure handler/controller functions
+const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
+const { allPets, addPet, removePet, updatePet } = petCtrl;
+const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
+
 //set up middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -27,19 +32,14 @@ app.use(session(
 // function isLoggedIn(req) {
 //     return req.session.userId !== undefined
 // }
-const isLoggedIn = req => req.session.userId !== undefined
 
-const requireLogin = (req, res, next) => {
-    if (!isLoggedIn(req)) {
-        return res.status(401).json({ error: 'Unauthorized' })
-    }
-    next()
-}
+// const requireLogin = (req, res, next) => {
+//     if (checkUser(req)) {
+//         return res.status(401).json({ error: 'Unauthorized' })
+//     }
+//     next()
+// }
 
-// destructure handler/controller functions
-const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
-const { allPets, addPet, removePet, updatePet } = petCtrl;
-const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
 
 //set up usersAll and authentication endpoints 
 app.get('/api/directory', allUsers)
@@ -51,9 +51,9 @@ app.post('/api/logout', logout)
 
 // user/pet ROUTES / ENDPOINTS
 app.get('/api/pets', allPets)
-app.post('/api/new-pet', requireLogin, addPet)
-app.delete('/api/pet/:id', requireLogin, removePet)
-app.put('/api/edit-pet/:id', requireLogin, updatePet)
+app.post('/api/new-pet', addPet)
+app.delete('/api/pet/:id', removePet)
+app.put('/api/edit-pet/:id', updatePet)
 
 //Maintenance Requests routes here
 app.get('/api/requests', allRequests)

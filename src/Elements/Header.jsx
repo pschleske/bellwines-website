@@ -1,6 +1,6 @@
 // import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
-// import { useAuth } from '../shared/contexts/useAuth';
+import { useAuth } from '../shared/contexts/useAuth';
 
 // const HeaderContainer = styled.div`
 //   height: 80px;
@@ -28,7 +28,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 
 export const Header = () => {
-    // const { currentUser, setCurrentUser } = useAuth()
+    const { currentUser, setCurrentUser } = useAuth()
 
     return (
         <>
@@ -36,6 +36,8 @@ export const Header = () => {
             <Link to='/'>
                 <h1>Bellwines</h1>
             </Link>
+
+            {!!currentUser && <>Hi {currentUser}</>}
 
             <NavLink to='/directory'>Directory</NavLink>
             <NavLink to='/pets'>Meet the Pets</NavLink>

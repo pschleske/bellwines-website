@@ -38,7 +38,7 @@ export default {
             }
         } catch (err) {
             console.log(err)
-            res.status(500).send('Something went wront trying to register')
+            res.status(500).send('Something went wrong trying to register')
         }
     },
 
@@ -58,6 +58,11 @@ export default {
 
     checkUser: async (req, res) => {
         console.log('hit checkUser')
+        if (req.session.userId) {
+            res.status(200).send(req.session.user)
+        } else {
+            res.status(400).send('There is no user in session')
+        }
     },
 
     logout: async (req, res) => {
