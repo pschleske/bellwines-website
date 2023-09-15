@@ -32,7 +32,7 @@ export const Landing = () => {
 
                 <form onSubmit={event => handleFormSubmit(event)} >
 
-                    <h1>Please Register</h1>
+                    <h3>Please Register</h3>
 
                     <label htmlFor="full-name">Full Name</label>
                     <input
@@ -63,7 +63,7 @@ export const Landing = () => {
             ) : (
 
                 <form onSubmit={event => handleFormSubmit(event)} >
-                    <h1>Login!</h1>
+                    <h3>Login!</h3>
                     <label htmlFor='email'> Email </label>
                     <input
                         id='email'

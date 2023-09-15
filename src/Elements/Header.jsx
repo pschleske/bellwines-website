@@ -1,5 +1,5 @@
 // import styled from 'styled-components';
-// import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 // import { useAuth } from '../shared/contexts/useAuth';
 
 // const HeaderContainer = styled.div`
@@ -33,8 +33,13 @@ export const Header = () => {
     return (
         <>
             {/* <HeaderContainer> */}
-            <h1>Bellwines</h1>
+            <Link to='/'>
+                <h1>Bellwines</h1>
+            </Link>
 
+            <NavLink to='/directory'>Directory</NavLink>
+            <NavLink to='/pets'>Meet the Pets</NavLink>
+            <NavLink to='/requests  '>Maintenance Requests</NavLink>
 
             {/* {!!currentUser && <>Hi {currentUser}</>} */}
             {/* <LinksWrapper>

@@ -42,7 +42,7 @@ const { allPets, addPet, removePet, updatePet } = petCtrl;
 const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
 
 //set up usersAll and authentication endpoints 
-app.get('/api/users', allUsers)
+app.get('/api/directory', allUsers)
 
 app.post('/api/register', register)
 app.post('/api/login', login)
