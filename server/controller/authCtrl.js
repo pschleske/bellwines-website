@@ -44,21 +44,45 @@ export default {
 
     login: async (req, res) => {
         console.log('hit Login')
-        const { email, password } = req.body;
-        const user = await User.findOne({
-            where: { email: email }
-        });
-        if (user && bcrypt.compare(password, user.hashedPass)) {
-            req.session.userId = user.userId;
-            res.status(200).send(req.session.user)
-        } else {
-            res.json({ success: false })
+        try {
+            const { email, password } = req.body;
+
+            const foundUser = await User.findOne({
+                where: { email }
+            });
+            if (!foundUser) {
+                res.status(400).send("Couldn't find user with that email")
+            } else {
+                const isAuthenticated = bcrypt.compareSync(password, foundUser.hashedPass)
+                if (isAuthenticated) {
+                    req.session.user = {
+                        userId: foundUser.userId,
+                        fullName: foundUser.fullName,
+                        apartmentNumber: foundUser.apartmentNumber,
+                        email: foundUser.email
+                    }
+                    res.status(200).send(req.session.user)
+                } else {
+                    res.status(401).send('Invalid password')
+                }
+            }
+        } catch (error) {
+            console.log(error)
+            res.sendStatus(500)
         }
+        // if (user && bcrypt.compare(password, user.hashedPass)) {
+        //     req.session.user = user;
+        //     console.log(req.session.user)
+        //     res.status(200).send(req.session.user)
+        // } else {
+        //     console.log(error)
+        //     res.sendStatus(500)
+        // }
     },
 
     checkUser: async (req, res) => {
         console.log('hit checkUser')
-        if (req.session.userId) {
+        if (req.session.user) {
             res.status(200).send(req.session.user)
         } else {
             res.status(400).send('There is no user in session')
@@ -67,12 +91,8 @@ export default {
 
     logout: async (req, res) => {
         console.log('hit logout')
-        if (!req.session.userId) {
-            res.status(401).send('Unauthorized!')
-        } else {
-            req.session.destroy();
-            res.json({ success: true })
-        }
+        req.session.destroy();
+        res.sendStatus(200);
     },
 
     isAdmin: async (req, res) => {

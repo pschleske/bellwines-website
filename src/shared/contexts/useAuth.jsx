@@ -1,9 +1,26 @@
 import { createContext, useContext, useState } from "react";
 
+
 const AuthContext = createContext(null)
 
 export const AuthProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState('');
+
+    // useEffect(() => {
+    //     const checkLoggedIn = async () => {
+    //         let authUser = ();
+    //         if (authUser) {
+    //             localStorage.setItem(res.data);
+    //             // authUser = '';
+    //         }
+
+    //         setCurrentUser(authUser);
+    //     };
+
+    //     checkLoggedIn();
+    // }, []);
+
+    // console.log('usercontext', currentUser);
 
     return (
         <AuthContext.Provider value={{

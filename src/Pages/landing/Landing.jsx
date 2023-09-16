@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 // import { Flex, Button, Input, FormLabel, FormControl } from '@chakra-ui/react';
 // import { useDisclosure, Modal, ModalBody, ModalOverlay, ModalCloseButton, ModalHeader, ModalContent, ModalFooter } from '@chakra-ui/react';
 // import { Tile } from '../shared/styledComponents';
-import { useAuth } from '../shared/contexts/useAuth';
+import { useAuth } from '../../shared/contexts/useAuth';
 
 export const Landing = () => {
     const [email, setEmail] = useState('');
@@ -11,7 +11,7 @@ export const Landing = () => {
     const [register, setRegister] = useState(false);
     const [fullName, setFullName] = useState('');
     const [apartmentNumber, setApartmentNumber] = useState();
-    const { currentUser, setCurrentUser } = useAuth()
+    const { currentUser, setCurrentUser } = useAuth();
 
     // const { onClose, onOpen, isOpen } = useDisclosure()
 
@@ -20,14 +20,17 @@ export const Landing = () => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
-
         // useEffect(() => {
-        axios.post(register ? '/api/register' : '/api/login', { fullName, apartmentNumber, email, password }).then(res => {
-            console.log(res.data)
-            // setCurrentUser(response.data.userId)
-            // dispatch redux to put the userId on global state, then redirect user to home page
-        }).catch((err => console.log(err)))
-
+        axios.post(register ? '/api/register' : '/api/login', { fullName, apartmentNumber, email, password })
+            .then(res => {
+                // console.log('this is the data:', res.data)
+                setCurrentUser(res.data.fullName)
+                // console.log('currentUser:', currentUser)
+                localStorage.setItem('user', currentUser)
+                console.log(localStorage)
+                // dispatch redux to put the userId on global state, then redirect user to home page
+            }).catch((err => console.log(err)))
+        console.log(1111111111, currentUser)
         // }, [])
     }
 

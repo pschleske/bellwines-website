@@ -5,10 +5,10 @@ import { Routes, Route } from 'react-router-dom';
 // import { ChakraProvider } from '@chakra-ui/react'
 
 import { Header } from './Elements/Header'
-import { Landing } from './Pages/Landing';
-import { Directory } from './Pages/Directory';
-import { Pets } from './Pages/Pets';
-import { Requests } from './Pages/Requests';
+import { Landing } from './Pages/landing/Landing';
+import { Directory } from './Pages/directory/Directory';
+import { Pets } from './Pages/pets/Pets';
+import { Requests } from './Pages/requests/Requests';
 // import { Home } from './Pages/Home';
 import { AuthProvider } from './shared/contexts/useAuth'
 

@@ -46,8 +46,8 @@ app.get('/api/directory', allUsers)
 
 app.post('/api/register', register)
 app.post('/api/login', login)
-//app.post(checkUser)
-app.post('/api/logout', logout)
+app.get('/api/user', checkUser)
+app.delete('/api/logout', logout)
 
 // user/pet ROUTES / ENDPOINTS
 app.get('/api/pets', allPets)

@@ -16,13 +16,13 @@ const petFunctions = {
         try {
             console.log('hit addPet')
             const { name, imgUrl, description } = req.body;
-            const { userId } = req.session;
+            // const { userId } = req.session;
 
             const petCard = await Pet.create({
                 name,
                 imgUrl,
                 description,
-                userId
+                // userId
             });
             res.status(201).send(petCard)
         } catch (err) {

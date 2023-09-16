@@ -1,9 +1,11 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import image from '../shared/img123.jpg'
+// import image from '../shared/img123.jpg'
+// import { useAuth } from '../../shared/contexts/useAuth';
 
 export const Directory = () => {
+    // const { currentUser, setCurrentUser } = useAuth();
     const [directoryData, setDirectoryData] = useState([]);
 
     useEffect(() => {
@@ -25,7 +27,7 @@ export const Directory = () => {
             <ul>
                 {directoryData.map((item) => (
                     <li key={item.userId}>
-                        <img src={image} />
+                        {/* <img src={image} /> */}
                         <strong>Full Name:</strong> {item.fullName}, <strong>Apartment Number:</strong> {item.apartmentNumber}
                     </li>
                 ))}

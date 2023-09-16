@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 // import styled from 'styled-components';
 import { Link, NavLink } from 'react-router-dom';
 import { useAuth } from '../shared/contexts/useAuth';
@@ -29,6 +30,21 @@ import { useAuth } from '../shared/contexts/useAuth';
 
 export const Header = () => {
     const { currentUser, setCurrentUser } = useAuth()
+    useEffect(() => {
+        const handleSession = () => {
+            if (!!currentUser) {
+                localStorage.setItem(currentUser)
+            }
+        }
+        handleSession();
+    }, [])
+
+    const handleLogout = () => {
+        localStorage.removeItem(currentUser)
+        setCurrentUser('');
+    }
+
+    console.log(currentUser)
 
     return (
         <>
@@ -37,12 +53,13 @@ export const Header = () => {
                 <h1>Bellwines</h1>
             </Link>
 
-            {!!currentUser && <>Hi {currentUser}</>}
+            {!!currentUser && <> <h3>{currentUser}`s Account</h3> </>}
 
             <NavLink to='/directory'>Directory</NavLink>
             <NavLink to='/pets'>Meet the Pets</NavLink>
             <NavLink to='/requests  '>Maintenance Requests</NavLink>
 
+            {!!currentUser && <button onClick={handleLogout}>Logout</button>}
             {/* {!!currentUser && <>Hi {currentUser}</>} */}
             {/* <LinksWrapper>
                     <PrimaryLink to="landing">landing</PrimaryLink>
