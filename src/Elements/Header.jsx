@@ -30,21 +30,21 @@ import { useAuth } from '../shared/contexts/useAuth';
 
 export const Header = () => {
     const { currentUser, setCurrentUser } = useAuth()
+
     useEffect(() => {
-        const handleSession = () => {
-            if (!!currentUser) {
-                localStorage.setItem(currentUser)
-            }
+        const storedUser = localStorage.getItem('user');
+        const userObj = JSON.parse(storedUser)
+        if (storedUser) {
+            setCurrentUser(userObj);
         }
-        handleSession();
-    }, [])
+    }, []);
 
     const handleLogout = () => {
-        localStorage.removeItem(currentUser)
+        localStorage.removeItem('user')
         setCurrentUser('');
     }
 
-    console.log(currentUser)
+    // console.log(currentUser)
 
     return (
         <>
@@ -53,7 +53,7 @@ export const Header = () => {
                 <h1>Bellwines</h1>
             </Link>
 
-            {!!currentUser && <> <h3>{currentUser}`s Account</h3> </>}
+            {!!currentUser && <> <h3>{currentUser.fullName}`s Account</h3> </>}
 
             <NavLink to='/directory'>Directory</NavLink>
             <NavLink to='/pets'>Meet the Pets</NavLink>

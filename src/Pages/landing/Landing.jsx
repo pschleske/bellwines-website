@@ -21,16 +21,22 @@ export const Landing = () => {
     const handleFormSubmit = event => {
         event.preventDefault()
         // useEffect(() => {
-        axios.post(register ? '/api/register' : '/api/login', { fullName, apartmentNumber, email, password })
+        axios
+            .post(register ? '/api/register' : '/api/login', {
+                fullName,
+                apartmentNumber,
+                email,
+                password
+            })
             .then(res => {
-                // console.log('this is the data:', res.data)
-                setCurrentUser(res.data.fullName)
-                // console.log('currentUser:', currentUser)
-                localStorage.setItem('user', currentUser)
-                console.log(localStorage)
+                const userData = res.data
+                console.log(11111, userData)
+                setCurrentUser(userData.fullName)
+                // console.log()
+                localStorage.setItem('user', JSON.stringify(userData))
+                console.log(22222, localStorage)
                 // dispatch redux to put the userId on global state, then redirect user to home page
             }).catch((err => console.log(err)))
-        console.log(1111111111, currentUser)
         // }, [])
     }
 
