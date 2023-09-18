@@ -30,11 +30,11 @@ export const Landing = () => {
             })
             .then(res => {
                 const userData = res.data
-                console.log(11111, userData)
+                // console.log(11111, userData)
                 setCurrentUser(userData.fullName)
                 // console.log()
                 localStorage.setItem('user', JSON.stringify(userData))
-                console.log(22222, localStorage)
+                // console.log(22222, localStorage)
                 // dispatch redux to put the userId on global state, then redirect user to home page
             }).catch((err => console.log(err)))
         // }, [])

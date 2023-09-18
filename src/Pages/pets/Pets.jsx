@@ -7,6 +7,11 @@ import { Pet } from './Pet';
 
 export const Pets = () => {
     const [petData, setPetData] = useState([]);
+    const [showAddPet, setShowAddPet] = useState(false)
+
+    const [name, setName] = useState('')
+    const [imgUrl, setImgUrl] = useState('')
+    const [description, setDescription] = useState('')
 
     useEffect(() => {
         const fetchData = async () => {
@@ -21,8 +26,9 @@ export const Pets = () => {
         fetchData();
     }, []);
 
-    const addPet = async () => {
-
+    const addPet = async (event) => {
+        event.preventDefault()
+        console.log('hit ADD PET!!!!!!')
         try {
             if (!name || !imgUrl || !description) {
                 alert('Please fill out all fields before adding a pet')
@@ -35,6 +41,7 @@ export const Pets = () => {
                 description
             })
             setPetData([...petData, data])
+            setShowAddPet(false)
 
         } catch (error) {
             console.error('Error adding pet:', error)
@@ -64,24 +71,59 @@ export const Pets = () => {
     //     )
     // })
 
+    // to do:
+    // add a show ADD pet state
+    // create form and conditionally render based on showAdd pet state 
+    if (showAddPet === true) {
+        return (
+            <form onSubmit={(event) => addPet(event)}>
+                <button onClick={() => setShowAddPet(false)}>x</button>
+                <label htmlFor="">Pet Name:</label>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(event) => setName(event.target.value)}
+                />
+                <label htmlFor="">Photo:</label>
+                <input
+                    type="text"
+                    value={imgUrl}
+                    onChange={(event) => setImgUrl(event.target.value)}
+                />
+                <label htmlFor="">Tell us about your pet:</label>
+                <input
+                    type="text"
+                    value={description}
+                    onChange={(event) => setDescription(event.target.value)}
+                />
+                <PetAddButton />
+            </form>
+        )
+    }
+
+    //TO DO: ADD AN X BUTTON ON FORM ABOVE, TO ENABLE USERS TO GO BACK TO THE LIST OF PETS. BUTTON WILL SET SHOWADDPET TO FALSE AND RENDER THE LLIST OF PETS 
+    // At the moment the only way to get out of this page is by clicking on a different link such as directory and then back to pets 
 
     return (
-        <>
-            <PetAddButton addClick={addPet} />
-            {petData.map((petItem) => (
-                <Pet
-                    key={petItem.petId}
-                    id={petItem.petId}
-                    initialPetData={{
-                        name: petItem.name,
-                        imgUrl: petItem.imgUrl,
-                        description: petItem.description,
-                    }}
-                    initialIsEditing={false}
-                    deleteFunc={() => deletePet(petItem.petId)}
-                />
-            ))}
-        </>
+        <div>
+
+            <PetAddButton addClick={() => setShowAddPet(true)} />
+            <div>
+                {petData.map((petItem) => (
+                    <Pet
+                        key={petItem.petId}
+                        id={petItem.petId}
+                        initialPetData={{
+                            name: petItem.name,
+                            imgUrl: petItem.imgUrl,
+                            description: petItem.description,
+                        }}
+                        initialIsEditing={false}
+                        deleteFunc={() => deletePet(petItem.petId)}
+                    />
+                ))}
+            </div>
+        </div>
     )
 }
 
