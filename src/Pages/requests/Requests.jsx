@@ -8,9 +8,11 @@ import { RequestRow } from './RequestRow';
 import { RequestStatus } from './RequestStatus';
 // import { ModeButtons } from './ModeButtons';
 import { AddButton } from './AddButton';
+// import { useAuth } from '.../shared/contexts/useAuth';
 
 export const Requests = () => {
     const [requestData, setRequestData] = useState([]);
+    // const { currentUser, setCurrentUser } = useAuth();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -25,8 +27,15 @@ export const Requests = () => {
     }, [])
 
     const addRequestRow = async () => {
+        console.log('addRequestRow function called');
         try {
-            let { data } = await axios.post('/api/new-request', { description: 'description' })
+            const currentUserData = JSON.parse(localStorage.getItem('user'));
+            console.log(currentUserData.userId)
+            let { data } = await axios.post('/api/new-request', {
+                userId: currentUserData.userId,
+                status: 'OPEN',
+                description: 'description'
+            })
             //get a copy of current list 
             //create new blank object for row
             //push new object into copied list 
@@ -67,16 +76,18 @@ export const Requests = () => {
                 </thead>
                 <tbody>
                     {requestData.map((item) => (
-                        <tr key={item.requestId}>
+                        <tr key={item.requestId}
+                            id={item.requestId}>
                             <td> {item.requestId} </td>
                             <td> {item.createdAt} </td>
                             {/* <td> {item.status} </td> */}
                             <RequestStatus
                                 isEditing={false}
-                                value='OPEN'
+                                value={item.status}
                             />
                             {/* <td> {item.description} </td> */}
                             <RequestRow
+                                item={item}
                                 initialReqData={{
                                     description: item.description
                                 }}

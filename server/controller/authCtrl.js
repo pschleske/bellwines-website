@@ -61,7 +61,15 @@ export default {
                         apartmentNumber: foundUser.apartmentNumber,
                         email: foundUser.email
                     }
-                    res.status(200).send(req.session.user)
+
+                    req.session.save((error) => {
+                        if (error) {
+                            console.error('Error saving session', error)
+                        } else {
+                            res.status(200).send(req.session.user)
+                        }
+                    })
+                    // res.status(200).send(req.session.user)
                 } else {
                     res.status(401).send('Invalid password')
                 }

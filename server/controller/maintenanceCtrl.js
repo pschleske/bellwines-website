@@ -14,12 +14,19 @@ const maintenanceFunctions = {
     addRequest: async (req, res) => {
         try {
             console.log('hit addRequests')
+            // console.log('Session Data:', req.session.user)
             const { description } = req.body;
             const { userId } = req.session;
+            // console.log('user received from sesh:', userId)
 
             const requestRow = await MaintenanceRequest.create({
+                // userId: req.session.user.userId,
                 description
-            })
+            },
+                // {
+                //     include: User
+                // }
+            );
             res.status(200).send(requestRow)
         } catch (error) {
             console.error('Error adding request:', error);
