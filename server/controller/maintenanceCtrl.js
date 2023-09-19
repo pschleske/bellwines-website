@@ -4,7 +4,14 @@ const maintenanceFunctions = {
     allRequests: async (req, res) => {
         try {
             console.log('hit allRequests')
-            const requests = await MaintenanceRequest.findAll()
+            const { userId } = req.query;
+
+            if (!userId || isNaN(userId)) {
+                return res.status(400).send('Invalid userId')
+            }
+            const requests = await MaintenanceRequest.findAll({
+                where: { userId: userId },
+            })
             res.status(200).send(requests)
         } catch (error) {
             res.status(500).send('Something went wrong!')

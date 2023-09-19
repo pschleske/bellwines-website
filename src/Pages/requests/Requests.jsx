@@ -8,7 +8,7 @@ import { RequestRow } from './RequestRow';
 import { RequestStatus } from './RequestStatus';
 // import { ModeButtons } from './ModeButtons';
 import { AddButton } from './AddButton';
-// import { useAuth } from '../shared/contexts/useAuth';
+// import { useAuth } from '../../shared/contexts/useAuth';
 
 export const Requests = () => {
     const [requestData, setRequestData] = useState([]);
@@ -17,7 +17,8 @@ export const Requests = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await axios.get('/api/requests');
+                const currentUserData = JSON.parse(localStorage.getItem('user'));
+                const response = await axios.get(`/api/requests?userId=${currentUserData.userId}`);
                 setRequestData(response.data)
             } catch (error) {
                 console.error('Error while getting requests:', error)
