@@ -25,7 +25,7 @@ const maintenanceFunctions = {
             const { description, status } = req.body;
             const { userId } = req.session.user;
 
-            console.log('user received from sesh:', userId)
+            // console.log('user received from sesh:', userId)
 
             const requestRow = await MaintenanceRequest.create({
                 userId,

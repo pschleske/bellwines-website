@@ -16,9 +16,11 @@ const petFunctions = {
         try {
             console.log('hit addPet')
             const { name, imgUrl, description } = req.body;
-            // const { userId } = req.session;
+            const { userId } = req.session.user;
+            // console.log('user received from sesh PETS:', userId)
 
             const petCard = await Pet.create({
+                userId,
                 name,
                 imgUrl,
                 description,
@@ -35,6 +37,7 @@ const petFunctions = {
         console.log('hit removePet')
         try {
             const { id } = req.params;
+
 
             const deletedPet = await Pet.destroy({
                 where: { petId: id }

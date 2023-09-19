@@ -9,10 +9,16 @@ import { PetImage } from './PetImage';
 import { PetDescription } from './PetDescription';
 import { PetModeButtons } from './PetModeButtons';
 
-export const Pet = ({ initialPetData, initialIsEditing, deleteFunc, id }) => {
+export const Pet = ({ initialPetData, initialIsEditing, deleteFunc, id, currentUserData }) => {
+    const [userId, setUserId] = useState(currentUserData)
     const [name, setName] = useState(initialPetData.name);
     const [imgUrl, setImgUrl] = useState(initialPetData.imgUrl);
     const [description, setDescription] = useState(initialPetData.description)
+
+    const isOwner = userId === initialPetData.userId
+    // console.log('initialPetData.userId', initialPetData.userId)
+    // console.log('currentUserData:', currentUserData.userId)
+    // console.log(userId)
 
     const [editMode, setEditMode] = useState(initialIsEditing)
 
@@ -51,12 +57,14 @@ export const Pet = ({ initialPetData, initialIsEditing, deleteFunc, id }) => {
                 value={description}
                 onValueChange={setDescription}
             />
-            <PetModeButtons
-                isEditing={editMode}
-                saveClick={changeNormalMode}
-                editClick={changeEditMode}
-                deleteClick={deleteFunc}
-            />
+            {isOwner && (
+                <PetModeButtons
+                    isEditing={editMode}
+                    saveClick={changeNormalMode}
+                    editClick={changeEditMode}
+                    deleteClick={deleteFunc}
+                />
+            )}
         </>
     )
 }

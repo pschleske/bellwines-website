@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 // import image from '../shared/img123.jpg'
 import { PetAddButton } from './PetAddButton';
 import { Pet } from './Pet';
+import { useAuth } from '../../shared/contexts/useAuth'
 
 export const Pets = () => {
     const [petData, setPetData] = useState([]);
@@ -12,6 +13,18 @@ export const Pets = () => {
     const [name, setName] = useState('')
     const [imgUrl, setImgUrl] = useState('')
     const [description, setDescription] = useState('')
+
+    const { currentUser, setCurrentUser } = useAuth()
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem('user');
+        // console.log('pets:', storedUser)
+        const userObj = JSON.parse(storedUser)
+        if (storedUser) {
+            setCurrentUser(userObj);
+        }
+    }, []);
+    // console.log(currentUser)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -114,14 +127,18 @@ export const Pets = () => {
                         key={petItem.petId}
                         id={petItem.petId}
                         initialPetData={{
+                            userId: petItem.userId,
                             name: petItem.name,
                             imgUrl: petItem.imgUrl,
                             description: petItem.description,
                         }}
                         initialIsEditing={false}
                         deleteFunc={() => deletePet(petItem.petId)}
+                        currentUserData={currentUser.userId}
+
                     />
                 ))}
+                {console.log(9999, currentUser.userId)}
             </div>
         </div>
     )
