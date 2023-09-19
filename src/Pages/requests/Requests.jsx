@@ -12,6 +12,7 @@ import { AddButton } from './AddButton';
 
 export const Requests = () => {
     const [requestData, setRequestData] = useState([]);
+    const [description, setDescription] = useState('');
     // const { currentUser, setCurrentUser } = useAuth();
 
     useEffect(() => {
@@ -35,7 +36,7 @@ export const Requests = () => {
             let { data } = await axios.post('/api/new-request', {
                 userId: currentUserData.userId,
                 status: 'OPEN',
-                description,
+                description: description,
             })
             //get a copy of current list 
             //create new blank object for row
