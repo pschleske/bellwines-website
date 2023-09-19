@@ -6,6 +6,7 @@ export const RequestDescription = ({ isEditing, value, onValueChange }) => {
         <td>
             <input
                 type="text"
+                placeholder="Tell us about the issue you're having"
                 value={value}
                 onChange={(event) => onValueChange(event.target.value)}
             />

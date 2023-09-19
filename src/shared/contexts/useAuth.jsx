@@ -12,6 +12,7 @@ export const AuthProvider = ({ children }) => {
             setCurrentUser
         }}>
             {children}
+            {/* {console.log(children)} */}
         </AuthContext.Provider>
     )
 }

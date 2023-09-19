@@ -15,12 +15,14 @@ const maintenanceFunctions = {
         try {
             console.log('hit addRequests')
             // console.log('Session Data:', req.session.user)
-            const { description } = req.body;
-            const { userId } = req.session;
-            // console.log('user received from sesh:', userId)
+            const { description, status } = req.body;
+            const { userId } = req.session.user;
+
+            console.log('user received from sesh:', userId)
 
             const requestRow = await MaintenanceRequest.create({
-                // userId: req.session.user.userId,
+                userId,
+                status,
                 description
             },
                 // {

@@ -1,6 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 // import styled from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../shared/contexts/useAuth';
 
 // const HeaderContainer = styled.div`
@@ -30,18 +30,23 @@ import { useAuth } from '../shared/contexts/useAuth';
 
 export const Header = () => {
     const { currentUser, setCurrentUser } = useAuth()
+    const navigate = useNavigate()
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
+        // console.log('header:', storedUser)
         const userObj = JSON.parse(storedUser)
         if (storedUser) {
             setCurrentUser(userObj);
         }
     }, []);
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
+        //axios request to destroy session
+        const response = await axios.delete('/api/logout')
         localStorage.removeItem('user')
         setCurrentUser('');
+        navigate('/landing')
     }
 
     // console.log(currentUser)
@@ -49,15 +54,15 @@ export const Header = () => {
     return (
         <>
             {/* <HeaderContainer> */}
-            <Link to='/'>
+            <Link to={currentUser ? '/directory' : '/'}>
                 <h1>Bellwines</h1>
             </Link>
 
             {!!currentUser && <> <h3>{currentUser.fullName}'s Account</h3> </>}
 
-            <NavLink to='/directory'>Directory</NavLink>
-            <NavLink to='/pets'>Meet the Pets</NavLink>
-            <NavLink to='/requests  '>Maintenance Requests</NavLink>
+            <NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink>
+            <NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink>
+            <NavLink to={currentUser ? '/requests' : '/landing'}>Maintenance Requests</NavLink>
 
             {!!currentUser && <button onClick={handleLogout}>Logout</button>}
             {/* {!!currentUser && <>Hi {currentUser}</>} */}

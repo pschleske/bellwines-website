@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 // import { Flex, Button, Input, FormLabel, FormControl } from '@chakra-ui/react';
 // import { useDisclosure, Modal, ModalBody, ModalOverlay, ModalCloseButton, ModalHeader, ModalContent, ModalFooter } from '@chakra-ui/react';
 // import { Tile } from '../shared/styledComponents';
@@ -12,6 +13,7 @@ export const Landing = () => {
     const [fullName, setFullName] = useState('');
     const [apartmentNumber, setApartmentNumber] = useState();
     const { currentUser, setCurrentUser } = useAuth();
+    let navigate = useNavigate();
 
     // const { onClose, onOpen, isOpen } = useDisclosure()
 
@@ -20,6 +22,7 @@ export const Landing = () => {
 
     const handleFormSubmit = event => {
         event.preventDefault()
+
         // useEffect(() => {
         axios
             .post(register ? '/api/register' : '/api/login', {
@@ -31,10 +34,13 @@ export const Landing = () => {
             .then(res => {
                 const userData = res.data
                 // console.log(11111, userData)
+                // setCurrentUser(console.log(userData.fullName))
                 setCurrentUser(userData.fullName)
                 // console.log()
                 localStorage.setItem('user', JSON.stringify(userData))
                 // console.log(22222, localStorage)
+                navigate('/directory')
+                window.location.reload()
                 // dispatch redux to put the userId on global state, then redirect user to home page
             }).catch((err => console.log(err)))
         // }, [])

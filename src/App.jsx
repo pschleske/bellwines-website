@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 // import axios from 'axios';
 // import { useState, useEffect } from 'react';
 // import { Box } from '@chakra-ui/react'
@@ -10,16 +10,19 @@ import { Directory } from './Pages/directory/Directory';
 import { Pets } from './Pages/pets/Pets';
 import { Requests } from './Pages/requests/Requests';
 // import { Home } from './Pages/Home';
-import { AuthProvider } from './shared/contexts/useAuth'
+import { AuthProvider } from './shared/contexts/useAuth';
+import { useAuth } from './shared/contexts/useAuth';
 
 function App() {
+  const { currentUser } = useAuth();
 
   return (
     <>
       <AuthProvider>
         <Header />
         <Routes>
-          <Route index element={<Landing />} />
+          <Route index element={currentUser ? <Navigate to='/directory' /> : <Landing />} />
+          <Route path='/landing' element={<Landing />} />
           <Route path='/' />
           <Route path='/directory' element={<Directory />}
           />

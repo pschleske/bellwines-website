@@ -53,7 +53,7 @@ export default {
             if (!foundUser) {
                 res.status(400).send("Couldn't find user with that email")
             } else {
-                const isAuthenticated = bcrypt.compareSync(password, foundUser.hashedPass)
+                const isAuthenticated = await bcrypt.compareSync(password, foundUser.hashedPass)
                 if (isAuthenticated) {
                     req.session.user = {
                         userId: foundUser.userId,
@@ -61,7 +61,7 @@ export default {
                         apartmentNumber: foundUser.apartmentNumber,
                         email: foundUser.email
                     }
-
+                    console.log(req.session.user)
                     req.session.save((error) => {
                         if (error) {
                             console.error('Error saving session', error)

@@ -8,7 +8,7 @@ import { RequestRow } from './RequestRow';
 import { RequestStatus } from './RequestStatus';
 // import { ModeButtons } from './ModeButtons';
 import { AddButton } from './AddButton';
-// import { useAuth } from '.../shared/contexts/useAuth';
+// import { useAuth } from '../shared/contexts/useAuth';
 
 export const Requests = () => {
     const [requestData, setRequestData] = useState([]);
@@ -30,11 +30,11 @@ export const Requests = () => {
         console.log('addRequestRow function called');
         try {
             const currentUserData = JSON.parse(localStorage.getItem('user'));
-            console.log(currentUserData.userId)
+            // console.log(currentUserData.userId)
             let { data } = await axios.post('/api/new-request', {
                 userId: currentUserData.userId,
                 status: 'OPEN',
-                description: 'description'
+                description,
             })
             //get a copy of current list 
             //create new blank object for row
