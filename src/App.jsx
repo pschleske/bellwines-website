@@ -4,7 +4,8 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 // import { Box } from '@chakra-ui/react'
 // import { ChakraProvider } from '@chakra-ui/react'
 
-import { Header } from './Elements/Header'
+import { Header } from './Elements/Header';
+import { Footer } from './Elements/Footer';
 import { Landing } from './Pages/landing/Landing';
 import { Directory } from './Pages/directory/Directory';
 import { Pets } from './Pages/pets/Pets';
@@ -29,6 +30,7 @@ function App() {
           <Route path='/pets' element={<Pets />} />
           <Route path='/requests' element={<Requests />} />
         </Routes>
+        <Footer />
       </AuthProvider>
     </>
   )

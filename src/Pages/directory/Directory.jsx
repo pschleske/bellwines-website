@@ -8,6 +8,7 @@ export const Directory = () => {
     // const { currentUser, setCurrentUser } = useAuth();
     const [directoryData, setDirectoryData] = useState([]);
 
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -24,14 +25,15 @@ export const Directory = () => {
     return (
         <div>
             <h3>Directory</h3>
-            <ul>
+            <div>
                 {directoryData.map((item) => (
-                    <li key={item.userId}>
-                        {/* <img src={image} /> */}
-                        <strong>Full Name:</strong> {item.fullName}, <strong>Apartment Number:</strong> {item.apartmentNumber}
-                    </li>
+                    <div key={item.userId}>
+                        <img src={item.imgUrl} />
+                        <strong>Full Name:</strong> {item.fullName} <br />
+                        <strong>Apt #:</strong> {item.apartmentNumber}
+                    </div>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 };

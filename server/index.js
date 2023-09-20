@@ -43,6 +43,19 @@ app.use(session(
 //     next()
 // }
 
+// API GET REQUEST 
+const api_url = "https://zenquotes.io/api/quotes/";
+
+async function getApi(req, res) {
+    const response = await fetch(api_url);
+    const data = await response.json();
+    // const quote = data.map((el) => `Quote:${el.q}  Author:${el.a}`)
+    // console.log(quote)
+    res.status(200).send(data)
+}
+// getApi(api_url)
+
+app.get('/api/quotes', getApi)
 
 //set up usersAll and authentication endpoints 
 app.get('/api/directory', allUsers)
@@ -71,4 +84,4 @@ app.get('/api/admin', isAdmin)
 
 
 // open up server 
-ViteExpress.listen(app, PORT, () => console.log(`Ready for you on port ${PORT}!!! Head over to http://localhost:${PORT}`))
+ViteExpress.listen(app, PORT, () => console.log(`Ready for you on port ${PORT} !!!Head over to http://localhost:${PORT}`))

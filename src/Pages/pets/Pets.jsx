@@ -138,7 +138,7 @@ export const Pets = () => {
 
                     />
                 ))}
-                {console.log(9999, currentUser.userId)}
+                {/* {console.log(9999, currentUser.userId)} */}
             </div>
         </div>
     )
