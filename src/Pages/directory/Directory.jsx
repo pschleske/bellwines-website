@@ -1,12 +1,12 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-// import image from '../shared/img123.jpg'
-// import { useAuth } from '../../shared/contexts/useAuth';
+
 
 export const Directory = () => {
-    // const { currentUser, setCurrentUser } = useAuth();
     const [directoryData, setDirectoryData] = useState([]);
+    const [pet, setPet] = useState([]);
+    const [ownsPet, setOwnsPet] = useState([]);
 
 
     useEffect(() => {
@@ -22,6 +22,36 @@ export const Directory = () => {
         fetchData();
     }, []);
 
+
+    const getPetNames = async () => {
+        try {
+            const response = await axios.get('/api/pet-owners')
+            console.log(response.data)
+            setPet(response.data)
+        } catch (error) {
+            alert('Error getting data', error)
+        }
+    }
+
+    const petData = (id) => {
+
+        return pet.map((item) => {
+            if (item.userId === id) {
+                // result.push(pet.name)
+                return (
+                    <p key={item.petId}>{item.name}</p>
+                )
+            }
+        })
+        // return result
+        console.log(ownsPet)
+    }
+    // petData(pet, id)
+
+    useEffect(() => {
+        getPetNames();
+    }, [])
+
     return (
         <div>
             <h3>Directory</h3>
@@ -31,9 +61,11 @@ export const Directory = () => {
                         <img src={item.imgUrl} />
                         <strong>Full Name:</strong> {item.fullName} <br />
                         <strong>Apt #:</strong> {item.apartmentNumber}
+                        <>{pet[0] && petData(item.userId)}</>
                     </div>
                 ))}
             </div>
+            {/* {petData(id)} */}
         </div>
     );
 };

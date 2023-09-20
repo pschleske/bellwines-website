@@ -1,4 +1,4 @@
-import { Pet, Message } from '../model.js';
+import { Pet, Message, User } from '../model.js';
 
 const petFunctions = {
     allPets: async (req, res) => {
@@ -78,6 +78,23 @@ const petFunctions = {
             console.error('Error trying to update pet:', error)
             res.status(500).json({ success: false, message: 'Internal Server Error' })
         }
+    },
+
+    getPetOwners: async (req, res) => {
+        console.log('hit getPetOwners!!')
+        try {
+            // const { userId } = req.;
+            const pets = await Pet.findAll({
+                include: User
+            })
+            res.status(200).send(pets)
+        } catch (error) {
+            console.log(error)
+            res.status(500).send('Error finding pets')
+        }
+        // SELECT pets.name, pets.user_id, users.user_id, users.full_name 
+        // FROM pets JOIN users 
+        // ON pets.user_id = users.user_id;        
     }
 }
 

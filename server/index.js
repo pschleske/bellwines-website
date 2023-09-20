@@ -12,7 +12,7 @@ const PORT = 4545;
 
 // destructure handler/controller functions
 const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
-const { allPets, addPet, removePet, updatePet } = petCtrl;
+const { allPets, addPet, removePet, updatePet, getPetOwners } = petCtrl;
 const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
 
 //set up middleware
@@ -56,6 +56,7 @@ async function getApi(req, res) {
 // getApi(api_url)
 
 app.get('/api/quotes', getApi)
+app.get('/api/pet-owners', getPetOwners)
 
 //set up usersAll and authentication endpoints 
 app.get('/api/directory', allUsers)

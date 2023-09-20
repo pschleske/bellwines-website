@@ -7,7 +7,7 @@ export const Footer = () => {
 
     async function getApi() {
         const res = await axios.get('/api/quotes')
-            .catch((err) => console.loh(err))
+            .catch((err) => console.log(err))
         // console.log(res.data)
         setData(res.data)
     }
@@ -18,7 +18,7 @@ export const Footer = () => {
 
     // const api_url = "https://zenquotes.io/api/quotes";
 
-    const quote = data.map((el) => `${el.q}  By: ${el.a}`)
+    const quote = data.map((el) => `${el.q}  -- ${el.a}`)
 
     // async function getApi(url) {
     //     const response = await axios.get(url).catch((err) => console.log(err))
