@@ -13,7 +13,7 @@ const PORT = 4545;
 // destructure handler/controller functions
 const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
 const { allPets, addPet, removePet, updatePet, getPetOwners } = petCtrl;
-const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
+const { allRequests, addRequest, updateRequest, removeRequest, adminRequests } = maintenanceCtrl;
 
 //set up middleware
 app.use(express.urlencoded({ extended: false }));
@@ -55,8 +55,10 @@ async function getApi(req, res) {
 }
 // getApi(api_url)
 
+// MISC routes here:  
 app.get('/api/quotes', getApi)
 app.get('/api/pet-owners', getPetOwners)
+app.get('/api/admin', adminRequests)
 
 //set up usersAll and authentication endpoints 
 app.get('/api/directory', allUsers)

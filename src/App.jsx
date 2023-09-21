@@ -10,6 +10,7 @@ import { Landing } from './Pages/landing/Landing';
 import { Directory } from './Pages/directory/Directory';
 import { Pets } from './Pages/pets/Pets';
 import { Requests } from './Pages/requests/Requests';
+import { Admin } from './Pages/Admin'
 // import { Home } from './Pages/Home';
 import { AuthProvider } from './shared/contexts/useAuth';
 import { useAuth } from './shared/contexts/useAuth';
@@ -29,6 +30,7 @@ function App() {
           />
           <Route path='/pets' element={<Pets />} />
           <Route path='/requests' element={<Requests />} />
+          <Route path='/admin' element={<Admin />} />
         </Routes>
         <Footer />
       </AuthProvider>

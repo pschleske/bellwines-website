@@ -64,6 +64,7 @@ export const Header = () => {
             <NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink>
             <NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink>
             <NavLink to={currentUser ? '/requests' : '/landing'}>Maintenance Requests</NavLink>
+            <NavLink to={currentUser ? '/admin' : '/directory'} > Admin</NavLink>
 
             {!!currentUser && <button onClick={handleLogout}>Logout</button>}
             {/* {!!currentUser && <>Hi {currentUser}</>} */}
