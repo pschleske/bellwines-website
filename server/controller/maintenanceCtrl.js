@@ -95,21 +95,6 @@ const maintenanceFunctions = {
             console.error('There was a problem deleting your request', error)
             res.status(500).json({ success: false, message: 'Internal Server Error' })
         }
-    },
-
-    adminRequests: async (req, res) => {
-        try {
-            // const { isAdmin } = req.session.user;
-            console.log('adminRequests function:')
-            // if (!isAdmin || isAdmin === null) {
-            //     return res.status(400).send('Invalid userId')
-            // }
-            const requests = await MaintenanceRequest.findAll()
-            res.status(200).send(requests)
-        } catch (error) {
-            console.log(error)
-            res.status(500).send('Internal Server Error')
-        }
     }
 }
 

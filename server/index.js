@@ -4,6 +4,7 @@ import session from 'express-session';
 import authCtrl from './controller/authCtrl.js';
 import petCtrl from './controller/petCtrl.js';
 import maintenanceCtrl from './controller/maintenanceCtrl.js';
+import adminCtrl from './controller/adminCtrl.js';
 
 // set up instance
 const app = express();
@@ -13,7 +14,8 @@ const PORT = 4545;
 // destructure handler/controller functions
 const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
 const { allPets, addPet, removePet, updatePet, getPetOwners } = petCtrl;
-const { allRequests, addRequest, updateRequest, removeRequest, adminRequests } = maintenanceCtrl;
+const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
+const { adminRequests, adminPets, adminDirectory } = adminCtrl;
 
 //set up middleware
 app.use(express.urlencoded({ extended: false }));
@@ -55,10 +57,8 @@ async function getApi(req, res) {
 }
 // getApi(api_url)
 
-// MISC routes here:  
+// external public API:  
 app.get('/api/quotes', getApi)
-app.get('/api/pet-owners', getPetOwners)
-app.get('/api/admin', adminRequests)
 
 //set up usersAll and authentication endpoints 
 app.get('/api/directory', allUsers)
@@ -81,7 +81,11 @@ app.put('/api/edit-request/:id', updateRequest)
 app.delete('/api/request/:id', removeRequest)
 
 //admin routes
-app.get('/api/admin', isAdmin)
+// app.get('/api/admin', isAdmin)
+app.get('/api/pet-owners', getPetOwners)
+app.get('/api/admin', adminRequests)
+app.get('/api/admin1', adminPets)
+app.get('/api/admin2', adminDirectory)
 
 //Message routes below  
 
