@@ -48,12 +48,13 @@ const maintenanceFunctions = {
             console.log('hit updateRequest')
             const { userId } = req.session;
             const { id } = req.params;
-            const { description } = req.body;
+            const { status, description } = req.body;
 
             const request = await MaintenanceRequest.findByPk(id);
             if (!request) {
                 return res.status(404).json({ success: false, message: 'Maintenance request not found' });
             }
+            request.status = status;
             request.description = description;
             await request.save();
 

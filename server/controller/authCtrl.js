@@ -59,7 +59,8 @@ export default {
                         userId: foundUser.userId,
                         fullName: foundUser.fullName,
                         apartmentNumber: foundUser.apartmentNumber,
-                        email: foundUser.email
+                        email: foundUser.email,
+                        isAdmin: foundUser.isAdmin
                     }
                     console.log(req.session.user)
                     req.session.save((error) => {

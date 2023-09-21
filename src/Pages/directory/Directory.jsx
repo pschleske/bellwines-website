@@ -1,12 +1,15 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+// import { useAuth } from '../../shared/contexts/useAuth';
 
 
 export const Directory = () => {
     const [directoryData, setDirectoryData] = useState([]);
     const [pet, setPet] = useState([]);
-    const [ownsPet, setOwnsPet] = useState([]);
+    // const [adminMode, setAdminMode] = useState(false);
+
+    // const { currentUser, setCurrentUser } = useAuth()
 
 
     useEffect(() => {
@@ -26,7 +29,7 @@ export const Directory = () => {
     const getPetNames = async () => {
         try {
             const response = await axios.get('/api/pet-owners')
-            console.log(response.data)
+            // console.log(response.data)
             setPet(response.data)
         } catch (error) {
             alert('Error getting data', error)
@@ -37,20 +40,27 @@ export const Directory = () => {
 
         return pet.map((item) => {
             if (item.userId === id) {
-                // result.push(pet.name)
                 return (
                     <p key={item.petId}>{item.name}</p>
                 )
             }
         })
-        // return result
-        console.log(ownsPet)
     }
-    // petData(pet, id)
+
+    // console.log('Directory current user:', currentUser.isAdmin)
+    // const isUserAdmin = () => {
+    //     if (currentUser.isAdmin === true) {
+    //         setAdminMode(true)
+    //     }
+    // }
 
     useEffect(() => {
         getPetNames();
     }, [])
+
+    // useEffect(() => {
+    //     isUserAdmin();
+    // }, [])
 
     return (
         <div>
@@ -61,13 +71,31 @@ export const Directory = () => {
                         <img src={item.imgUrl} />
                         <strong>Full Name:</strong> {item.fullName} <br />
                         <strong>Apt #:</strong> {item.apartmentNumber}
-                        <>{pet[0] && petData(item.userId)}</>
+                        <div><strong>Pets:</strong>{pet[0] && petData(item.userId)}</div>
                     </div>
                 ))}
             </div>
-            {/* {petData(id)} */}
         </div>
     );
+
+    // adminMode ? (
+    //     <div>
+    //         <h3>Directory</h3>
+    //         <div>
+    //             {directoryData.map((item) => (
+    //                 <div key={item.userId}>
+    //                     <img src={item.imgUrl} />
+    //                     <strong>Full Name:</strong> {item.fullName} <br />
+    //                     <strong>Apt #:</strong> {item.apartmentNumber}
+    //                     <div><strong>Pets:</strong>{pet[0] && petData(item.userId)}</div>
+    //                     <button> Edit </button> <button onClick={setAdminMode(false)}> Save </button> <button> Delete </button>
+    //                 </div>
+    //             ))}
+    //         </div>
+    //     </div>
+
+    // ) : 
+
 };
 
 

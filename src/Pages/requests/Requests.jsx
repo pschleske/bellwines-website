@@ -83,14 +83,15 @@ export const Requests = () => {
                             <td> {item.requestId} </td>
                             <td> {item.createdAt} </td>
                             {/* <td> {item.status} </td> */}
-                            <RequestStatus
+                            {/* <RequestStatus
                                 isEditing={false}
                                 value={item.status}
-                            />
+                            /> */}
                             {/* <td> {item.description} </td> */}
                             <RequestRow
                                 item={item}
                                 initialReqData={{
+                                    status: item.status,
                                     description: item.description
                                 }}
                                 initialEditing={false}
