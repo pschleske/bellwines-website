@@ -30,7 +30,7 @@ function App() {
           />
           <Route path='/pets' element={<Pets />} />
           <Route path='/requests' element={<Requests />} />
-          <Route path='/admin' element={<Admin />} />
+          {/* <Route path='/admin' element={<Admin />} /> */}
         </Routes>
         <Footer />
       </AuthProvider>
