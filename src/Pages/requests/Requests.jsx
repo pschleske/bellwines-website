@@ -34,7 +34,7 @@ export const Requests = () => {
             const currentUserData = JSON.parse(localStorage.getItem('user'));
             // console.log(currentUserData.userId)
             let { data } = await axios.post('/api/new-request', {
-                userId: currentUserData.userId,
+                userId: currentUserData.user,
                 status: 'OPEN',
                 description: description,
             })
@@ -81,7 +81,8 @@ export const Requests = () => {
                         <tr key={item.requestId}
                             id={item.requestId}>
                             <td> {item.requestId} </td>
-                            <td> {item.createdAt} </td>
+                            <td> {Date(item.createdAt)} </td>
+                            {/* {console.log(Date(item.createdAt))} */}
                             {/* <td> {item.status} </td> */}
                             {/* <RequestStatus
                                 isEditing={false}

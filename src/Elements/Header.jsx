@@ -35,7 +35,7 @@ export const Header = () => {
 
     useEffect(() => {
         const storedUser = localStorage.getItem('user');
-        console.log('header:', storedUser)
+        // console.log('header:', storedUser)
         const userObj = JSON.parse(storedUser)
         if (storedUser) {
             setCurrentUser(userObj);

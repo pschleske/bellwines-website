@@ -9,6 +9,9 @@ export const Admin = () => {
 
     const [adminEdit, setAdminEdit] = useState(false);
 
+    const [reqDescription, setReqDescription] = useState(adminRequestsData.description)
+    const [status, setStatus] = useState(adminRequestsData.status)
+
     const changeEditMode = () => { setAdminEdit(true) }
     const changeNonEdit = () => { setAdminEdit(false) }
 
@@ -51,6 +54,77 @@ export const Admin = () => {
         fetchUserData();
     }, [])
 
+    // const updateRequest = async (requestId, bodyObj) => {
+    //     try {
+    //         let bodyObj = {
+    //             status,
+    //             description: reqDescription
+    //         }
+    //         const { data } = await axios.put(`/api/edit-request/${adminRequestsData.requestId}`, bodyObj)
+    //         if (!data.error) {
+    //             setAdminEdit(false)
+    //         }
+    //     } catch (error) {
+    //         console.log(error)
+    //     }
+    // }
+    const updateRequest = async (requestId, bodyObj) => {
+        // let bodyObj = {
+        //     status,
+        //     description: reqDescription
+        // }
+        try {
+
+            const { data } = await axios.put(`/api/edit-request/${requestId}`, bodyObj);
+
+            if (!data.error) {
+                setAdminEdit(false);
+
+                // Optionally, update the state with the modified data
+                setAdminRequestsData((prevData) =>
+                    prevData.map((item) => {
+                        if (item.requestId === requestId) {
+                            return { ...item, ...bodyObj };
+                        }
+                        return item;
+                    })
+                );
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    // const handleStatusChange = (event, requestId) => {
+    //     const newStatus = event.target.value;
+
+    //     const updatedItem = adminRequestsData.find(item => item.requestId === requestId);
+    //     if (updatedItem) {
+    //         updatedItem.status = newStatus;
+    //     }
+    // };
+    const handleStatusChange = (event, requestId) => {
+        const newStatus = event.target.value;
+        const statusUpdate = { status: newStatus };
+
+        updateRequest(requestId, statusUpdate);
+    };
+
+    const handleDescriptionChange = (event, requestId) => {
+        // Get the new description from the event
+        const newDescription = event.target.value;
+
+        // Update the corresponding item in the state
+        setRequestData(prevData => {
+            return prevData.map(item => {
+                if (item.requestId === requestId) {
+                    return { ...item, description: newDescription };
+                }
+                return item;
+            });
+        });
+    };
+
     return !adminEdit ? (
         <>
             <h3>Admin</h3>
@@ -63,6 +137,7 @@ export const Admin = () => {
                         <th>Date Created</th>
                         <th>Status</th>
                         <th>Description</th>
+                        <th> User Id</th>
                         <th></th>
                     </tr>
                 </thead>
@@ -74,8 +149,9 @@ export const Admin = () => {
                             <td> {item.createdAt} </td>
                             <td> {item.status} </td>
                             <td> {item.description} </td>
+                            <td> {item.userId} </td>
                             <td>
-                                <button> Edit </button>
+                                <button onClick={() => setAdminEdit(true)}> Edit </button>
                             </td>
                         </tr>
                     ))}
@@ -137,7 +213,7 @@ export const Admin = () => {
                             <td> {userItem.email} </td>
                             <td> {userItem.isAdmin} </td>
                             <td>
-                                <button> Edit </button>
+                                <button onClick={() => setAdminEdit(true)}> Edit </button>
                             </td>
                         </tr>
                     ))}
@@ -169,9 +245,9 @@ export const Admin = () => {
 
                                 <select
                                     name="status"
-                                // value={value}
-                                // onChange={(event) => onValueChange(event.target.value)}
-                                // autoFocus={true}
+                                    value={item.status}
+                                    onChange={(event) => handleStatusChange(event.target.value)}
+                                    autoFocus={true}
                                 >
                                     <option value="Open">Open</option>
                                     <option value="Under Review">Under Review</option>
@@ -184,14 +260,14 @@ export const Admin = () => {
                             <td>
                                 <input
                                     type="text"
-                                    placeholder="Tell us about the issue you're having"
-                                // value={value}
-                                // onChange={(event) => onValueChange(event.target.value)}
+                                    // placeholder="Tell us about the issue you're having"
+                                    // value={item.description}
+                                    onChange={(event) => handleDescriptionChange(event.target.value)}
                                 />
 
                             </td>
                             <td>
-                                <button> Save </button>
+                                <button onClick={() => { updateRequest(item.requestId, adminRequestsData); setAdminEdit(false) }}> Save </button>
                             </td>
                         </tr>
                     ))}
