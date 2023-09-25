@@ -1,4 +1,4 @@
-import { MaintenanceRequest } from '../model.js'
+import { MaintenanceRequest, User } from '../model.js'
 
 const maintenanceFunctions = {
     allRequests: async (req, res) => {
@@ -9,10 +9,23 @@ const maintenanceFunctions = {
             if (!userId || isNaN(userId)) {
                 return res.status(400).send('Invalid userId')
             }
-            const requests = await MaintenanceRequest.findAll({
+
+            const user = await User.findOne({
                 where: { userId: userId },
             })
-            res.status(200).send(requests)
+            if (user.isAdmin == true) {
+                const adminRequests = await MaintenanceRequest.findAll()
+                res.status(200).send(adminRequests)
+            } else {
+                // get the userdata by userId 
+                // check userData, if isAdmin === true 
+                // if true, then get all requests 
+                // if false, below (get only requests belonging to userId)
+                const requests = await MaintenanceRequest.findAll({
+                    where: { userId: userId },
+                })
+                res.status(200).send(requests)
+            }
         } catch (error) {
             res.status(500).send('Something went wrong!')
         }
