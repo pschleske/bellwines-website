@@ -1,6 +1,8 @@
 import express from 'express';
 import ViteExpress from 'vite-express';
 import session from 'express-session';
+import Stripe from 'stripe';
+
 import authCtrl from './controller/authCtrl.js';
 import petCtrl from './controller/petCtrl.js';
 import maintenanceCtrl from './controller/maintenanceCtrl.js';
@@ -33,6 +35,7 @@ app.use(session(
         }
     }
 ));
+const stripe = new Stripe('sk_test_51NuLfSHrrNngtjIfCxtI1TKBLBUWE2SgSrA4bMRDyfwGYwy4mgTPQML4Eraf683ZDB4BgA90tfZg2XicUr0MRj2q00UDXFhrHZ');
 
 // function isLoggedIn(req) {
 //     return req.session.userId !== undefined
@@ -55,7 +58,31 @@ async function getApi(req, res) {
     // console.log(quote)
     res.status(200).send(data)
 }
-// getApi(api_url)
+// stripe end point here:
+const calculateOrderAmount = (items) => {
+    // Replace this constant with a calculation of the order's amount
+    // Calculate the order total on the server to prevent
+    // people from directly manipulating the amount on the client
+    return 1400;
+};
+
+app.post("/create-payment-intent", async (req, res) => {
+    const { items } = req.body;
+
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: calculateOrderAmount(items),
+        currency: "usd",
+        // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+        automatic_payment_methods: {
+            enabled: true,
+        },
+    });
+
+    res.send({
+        clientSecret: paymentIntent.client_secret,
+    });
+});
 
 // external public API:  
 app.get('/api/quotes', getApi)
