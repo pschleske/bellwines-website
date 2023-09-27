@@ -89,8 +89,8 @@ export const PaymentPortal = () => {
             <table>
                 <thead>
                     <tr>
-                        <td>Invoice Items</td>
-                        <td>Amount</td>
+                        <th>Invoice Items</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -112,8 +112,10 @@ export const PaymentPortal = () => {
                     </tr>
                 </tbody>
                 <tfoot>
-                    <td>Total:</td>
-                    <td key="total" value={1650}>$1,650</td>
+                    <tr>
+                        <th>Total:</th>
+                        <td key="total" value={1650}>$1,650</td>
+                    </tr>
                 </tfoot>
             </table>
             <br />
