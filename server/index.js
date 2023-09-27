@@ -37,17 +37,6 @@ app.use(session(
 ));
 const stripe = new Stripe('sk_test_51NuLfSHrrNngtjIfCxtI1TKBLBUWE2SgSrA4bMRDyfwGYwy4mgTPQML4Eraf683ZDB4BgA90tfZg2XicUr0MRj2q00UDXFhrHZ');
 
-// function isLoggedIn(req) {
-//     return req.session.userId !== undefined
-// }
-
-// const requireLogin = (req, res, next) => {
-//     if (checkUser(req)) {
-//         return res.status(401).json({ error: 'Unauthorized' })
-//     }
-//     next()
-// }
-
 // API GET REQUEST 
 const api_url = "https://zenquotes.io/api/quotes/";
 
@@ -60,10 +49,8 @@ async function getApi(req, res) {
 }
 // stripe end point here:
 const calculateOrderAmount = (items) => {
-    // Replace this constant with a calculation of the order's amount
-    // Calculate the order total on the server to prevent
-    // people from directly manipulating the amount on the client
-    return 1400;
+    // const total = items * amount
+    return 165000;
 };
 
 app.post("/create-payment-intent", async (req, res) => {
@@ -73,7 +60,6 @@ app.post("/create-payment-intent", async (req, res) => {
     const paymentIntent = await stripe.paymentIntents.create({
         amount: calculateOrderAmount(items),
         currency: "usd",
-        // In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
         automatic_payment_methods: {
             enabled: true,
         },

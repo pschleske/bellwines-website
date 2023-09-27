@@ -21,7 +21,11 @@ User.init(
         imgUrl: {
             type: DataTypes.STRING,
         },
-        fullName: {
+        firstName: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        lastName: {
             type: DataTypes.STRING,
             allowNull: false,
         },

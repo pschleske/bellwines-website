@@ -10,8 +10,11 @@ export const Landing = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [register, setRegister] = useState(false);
-    const [fullName, setFullName] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [imgUrl, setImgUrl] = useState('https://upload.wikimedia.org/wikipedia/commons/8/89/Portrait_Placeholder.png')
     const [apartmentNumber, setApartmentNumber] = useState();
+
     const { currentUser, setCurrentUser } = useAuth();
     let navigate = useNavigate();
 
@@ -26,7 +29,9 @@ export const Landing = () => {
         // useEffect(() => {
         axios
             .post(register ? '/api/register' : '/api/login', {
-                fullName,
+                firstName,
+                lastName,
+                imgUrl,
                 apartmentNumber,
                 email,
                 password
@@ -35,7 +40,7 @@ export const Landing = () => {
                 const userData = res.data
                 // console.log(11111, userData)
                 // setCurrentUser(console.log(userData.fullName))
-                setCurrentUser(userData.fullName)
+                setCurrentUser(userData.firstName)
                 // console.log()
                 localStorage.setItem('user', JSON.stringify(userData))
                 // console.log(22222, localStorage)
@@ -54,22 +59,39 @@ export const Landing = () => {
 
                     <h3>Please Register</h3>
 
-                    <label htmlFor="full-name">Full Name</label>
+                    <label htmlFor="first-name">First Name</label>
                     <input
-                        id="full-name"
+                        id="first-name"
                         width={500}
-                        value={fullName}
-                        onChange={event => setFullName(event.target.value)} />
+                        value={firstName}
+                        onChange={event => setFirstName(event.target.value)} />
+
+                    <label htmlFor="last-name">Last Name</label>
+                    <input
+                        id="last-name"
+                        width={500}
+                        value={lastName}
+                        onChange={event => setLastName(event.target.value)} />
+
+                    <label htmlFor="profile-pic">Add a profile pic!</label>
+                    <input
+                        id="profile-pic"
+                        width={500}
+                        value={imgUrl}
+                        onChange={event => setImgUrl(event.target.value)} />
+
                     <label htmlFor="apartmentNumber">Apt #</label>
                     <input
                         id='apartment-number'
                         value={apartmentNumber}
                         onChange={event => setApartmentNumber(event.target.value)} />
+
                     <label htmlFor="email">Email</label>
                     <input
                         id='email'
                         value={email}
                         onChange={event => setEmail(event.target.value)} />
+
                     <label htmlFor="password">Password</label>
                     <input
                         id='password'

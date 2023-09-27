@@ -16,7 +16,7 @@ export default {
     register: async (req, res) => {
         console.log('hit Register')
         try {
-            const { fullName, apartmentNumber, email, password } = req.body;
+            const { firstName, lastName, imgUrl, apartmentNumber, email, password } = req.body;
 
             const foundUser = await User.findOne({ where: { email } })
 
@@ -26,11 +26,13 @@ export default {
                 const salt = bcrypt.genSaltSync(10)
                 const hash = bcrypt.hashSync(password, salt)
 
-                const newUser = await User.create({ fullName, apartmentNumber, email, hashedPass: hash })
+                const newUser = await User.create({ firstName, lastName, imgUrl, apartmentNumber, email, hashedPass: hash })
 
                 req.session.user = {
                     userId: newUser.id,
-                    fullName: newUser.fullName,
+                    firstName: newUser.firstName,
+                    lastName: newUser.lastName,
+                    imgUrl: newUser.imgUrl,
                     apartmentNumber: newUser.apartmentNumber,
                     email: newUser.email
                 }
@@ -57,7 +59,8 @@ export default {
                 if (isAuthenticated) {
                     req.session.user = {
                         userId: foundUser.userId,
-                        fullName: foundUser.fullName,
+                        firstName: foundUser.firstName,
+                        lastName: foundUser.lastName,
                         apartmentNumber: foundUser.apartmentNumber,
                         email: foundUser.email,
                         isAdmin: foundUser.isAdmin

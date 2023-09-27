@@ -69,7 +69,8 @@ export const Directory = () => {
                 {directoryData.map((item) => (
                     <div key={item.userId}>
                         <img src={item.imgUrl} />
-                        <strong>Full Name:</strong> {item.fullName} <br />
+                        <strong>First Name:</strong> {item.firstName} <br />
+                        <strong>Last Name:</strong> {item.lastName} <br />
                         <strong>Apt #:</strong> {item.apartmentNumber}
                         <div><strong>Pets:</strong>{pet[0] && petData(item.userId)}</div>
                     </div>

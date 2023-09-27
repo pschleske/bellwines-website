@@ -195,7 +195,8 @@ export const Admin = () => {
                 <thead>
                     <tr>
                         <th>User Id</th>
-                        <th>Full Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
                         <th>Image Url</th>
                         <th>Apt #</th>
                         <th>Email</th>
@@ -207,7 +208,8 @@ export const Admin = () => {
                     {adminUserData.map((userItem) => (
                         <tr key={userItem.userId}>
                             <td> {userItem.userId} </td>
-                            <td> {userItem.fullName} </td>
+                            <td> {userItem.firstName} </td>
+                            <td> {userItem.lastName} </td>
                             <td> {userItem.imgUrl} </td>
                             <td> {userItem.apartmentNumber} </td>
                             <td> {userItem.email} </td>

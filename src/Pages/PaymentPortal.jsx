@@ -85,28 +85,54 @@ export const PaymentPortal = () => {
     }
 
     return (
-        <div className="App">
-            <form id="payment-form" onSubmit={handleSubmit}>
-                <label htmlFor="amount">Enter Amount To Pay:</label>
-                <input
-                    type="number"
-                    placeholder="Enter amount"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                />
-                <LinkAuthenticationElement
-                    id="link-authentication-element"
-                    onChange={(e) => setEmail(e.target.value)}
-                />
-                <PaymentElement id="payment-element" options={paymentElementOptions} />
-                <button disabled={isLoading || !stripe || !elements} id="submit">
-                    <span id="button-text">
-                        {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
-                    </span>
-                </button>
-                {/* Show any error or success messages */}
-                {message && <div id="payment-message">{message}</div>}
-            </form>
-        </div>
+        <>
+            <table>
+                <thead>
+                    <tr>
+                        <td>Invoice Items</td>
+                        <td>Amount</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Rent:</td>
+                        <td>$1,500</td>
+                    </tr>
+                    <tr>
+                        <td>Parking:</td>
+                        <td>$50</td>
+                    </tr>
+                    <tr>
+                        <td>Internet:</td>
+                        <td>$50</td>
+                    </tr>
+                    <tr>
+                        <td>Pet Rent:</td>
+                        <td>$50</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td>Total:</td>
+                    <td key="total" value={1650}>$1,650</td>
+                </tfoot>
+            </table>
+            <br />
+            <div className="App">
+                <form id="payment-form" onSubmit={handleSubmit}>
+                    <LinkAuthenticationElement
+                        id="link-authentication-element"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                    <PaymentElement id="payment-element" options={paymentElementOptions} />
+                    <button disabled={isLoading || !stripe || !elements} id="submit">
+                        <span id="button-text">
+                            {isLoading ? <div className="spinner" id="spinner"></div> : "Pay $1,650"}
+                        </span>
+                    </button>
+                    {/* Show any error or success messages */}
+                    {message && <div id="payment-message">{message}</div>}
+                </form>
+            </div>
+        </>
     )
 }

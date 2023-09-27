@@ -59,7 +59,7 @@ export const Header = () => {
                 <h1>Bellwines</h1>
             </Link>
 
-            {!!currentUser && <> <h3>{currentUser.fullName}'s Account</h3> </>}
+            {!!currentUser && <> <h3>{currentUser.firstName}'s Account</h3> </>}
 
             <NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink>
             <NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink>
