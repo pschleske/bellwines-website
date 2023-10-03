@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Box, Text, Button, Link, Flex, Spacer } from '@chakra-ui/react';
+import { EmailIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 
 export const Footer = () => {
@@ -30,20 +32,19 @@ export const Footer = () => {
 
 
     return (
-        <footer>
-            <h4>Quote of the day:</h4>
-
-            {quote[quotes]}
-            <button onClick={changeQuotes}>New Quote</button>
-
-            <div>
-                <h4>Contact Us</h4>
-                <ul>
-                    <li>
-                        <a href="mailto:bellwines@email.com">Email Bellwines</a>
-                    </li>
-                </ul>
-            </div>
-        </footer >
+        // gap = '2'
+        <Flex minWidth='100%' h='150px' justify='space-between' bg='gray.50'>
+            <Box as='footer' p='2' >
+                <Text fontSize='xs' fontWeight='bold'>Quote of the day:</Text>
+                <Text fontSize='xs'>{quote[quotes]}</Text>
+                <Button onClick={changeQuotes} size='xs' colorScheme='blue' variant='outline'>New Quote</Button>
+            </Box >
+            <Spacer />
+            <Spacer />
+            <Box align='end' p='2'>
+                <Text fontSize='sm' fontWeight='bold'>Contact Us<EmailIcon /></Text>
+                <Link fontSize='sm' href="mailto:bellwines@email.com">Email Bellwines</Link>
+            </Box>
+        </Flex>
     )
 }
