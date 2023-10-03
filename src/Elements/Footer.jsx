@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Text, Button, Link, Flex, Spacer } from '@chakra-ui/react';
+import { Box, Text, Button, Link, HStack, Spacer } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 
@@ -32,19 +32,30 @@ export const Footer = () => {
 
 
     return (
-        // gap = '2'
-        <Flex minWidth='100%' h='150px' justify='space-between' bg='gray.50'>
-            <Box as='footer' p='2' >
-                <Text fontSize='xs' fontWeight='bold'>Quote of the day:</Text>
-                <Text fontSize='xs'>{quote[quotes]}</Text>
-                <Button onClick={changeQuotes} size='xs' colorScheme='blue' variant='outline'>New Quote</Button>
-            </Box >
-            <Spacer />
-            <Spacer />
-            <Box align='end' p='2'>
-                <Text fontSize='sm' fontWeight='bold'>Contact Us<EmailIcon /></Text>
-                <Link fontSize='sm' href="mailto:bellwines@email.com">Email Bellwines</Link>
-            </Box>
-        </Flex>
+        <Box
+            as="footer"
+            bg="gray.50"
+            p="2"
+            position="absolute"
+            bottom="0"
+            left="0"
+            right="0"
+            width="100%"
+            h='150px' >
+            <HStack spacing='4'>
+                <Box as='footer' p='2' >
+                    <Text fontSize='xs' fontWeight='bold'>Quote of the day:</Text>
+                    <Text fontSize='xs'>{quote[quotes]}</Text>
+                    <Button onClick={changeQuotes} size='xs' colorScheme='blue' variant='outline'>New Quote</Button>
+                </Box >
+
+                <Spacer />
+
+                <Box align='end' p='2'>
+                    <Text fontSize='sm' fontWeight='bold'>Contact Us<EmailIcon /></Text>
+                    <Link fontSize='sm' href="mailto:bellwines@email.com">Email Us</Link>
+                </Box>
+            </HStack>
+        </Box >
     )
 }

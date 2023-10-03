@@ -1,8 +1,9 @@
 html,
 body {
   margin: 0;
+  height: 110%;
 }
 
-* {
+/* * {
   box-sizing: border-box;
-}
+} */
