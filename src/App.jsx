@@ -4,7 +4,7 @@ import { loadStripe } from '@stripe/stripe-js';
 // import axios from 'axios';
 import { useState, useEffect } from 'react';
 // import { Box } from '@chakra-ui/react'
-// import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from '@chakra-ui/react'
 
 import { Header } from './Elements/Header';
 import { Footer } from './Elements/Footer';
@@ -48,27 +48,29 @@ function App() {
 
   return (
     <>
-      <AuthProvider>
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <Header />
-            <Routes>
-              <Route index element={currentUser ? <Navigate to='/directory' /> : <Landing />} />
-              <Route path='/landing' element={<Landing />} />
-              <Route path='/' />
-              <Route path='/directory' element={<Directory />}
-              />
-              <Route path='/pets' element={<Pets />} />
-              <Route path='/requests' element={<Requests />} />
-              {/* <Route path='/admin' element={<Admin />} /> */}
-              <Route path='/calendar' element={<Calendar />} />
-              <Route path='/payments' element={<PaymentPortal />} />
-              <Route path='/payment-success' element={<PaymentSuccess />} />
-            </Routes>
-            <Footer />
-          </Elements>
-        )}
-      </AuthProvider>
+      <ChakraProvider>
+        <AuthProvider>
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <Header />
+              <Routes>
+                <Route index element={currentUser ? <Navigate to='/directory' /> : <Landing />} />
+                <Route path='/landing' element={<Landing />} />
+                <Route path='/' />
+                <Route path='/directory' element={<Directory />}
+                />
+                <Route path='/pets' element={<Pets />} />
+                <Route path='/requests' element={<Requests />} />
+                {/* <Route path='/admin' element={<Admin />} /> */}
+                <Route path='/calendar' element={<Calendar />} />
+                <Route path='/payments' element={<PaymentPortal />} />
+                <Route path='/payment-success' element={<PaymentSuccess />} />
+              </Routes>
+              <Footer />
+            </Elements>
+          )}
+        </AuthProvider>
+      </ChakraProvider>
     </>
   )
 }

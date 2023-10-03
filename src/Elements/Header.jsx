@@ -3,6 +3,11 @@ import axios from 'axios';
 // import styled from 'styled-components';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../shared/contexts/useAuth';
+import {
+    Flex, Box, Spacer, Heading,
+    Tabs, TabList, Tab,
+    Button
+} from '@chakra-ui/react';
 
 // const HeaderContainer = styled.div`
 //   height: 80px;
@@ -55,27 +60,37 @@ export const Header = () => {
     return (
         <>
             {/* <HeaderContainer> */}
-            <Link to={currentUser ? '/directory' : '/'}>
-                <h1>Bellwines</h1>
-            </Link>
+            <Flex minWidth='max-content' alignItems='center' gap='2' h='100px' borderBottom='1px' borderColor='gray.100'>
+                <Box p='2'>
+                    <Link to={currentUser ? '/directory' : '/'}>
+                        <Heading size='lg'>Bellwines</Heading>
+                    </Link>
+                </Box>
+                <Spacer />
 
-            {!!currentUser && <> <h3>{currentUser.firstName}'s Account</h3> </>}
+                {!!currentUser && <> <Heading size='sm'>{currentUser.firstName}'s Account</Heading> </>}
 
-            <NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink>
-            <NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink>
-            <NavLink to={currentUser ? '/requests' : '/landing'}>Maintenance Requests</NavLink>
-            <NavLink to={currentUser ? '/calendar' : '/landing'}>Calendar</NavLink>
-            <NavLink to={currentUser ? '/payments' : '/landing'}>Payment Portal</NavLink>
-            {/* <NavLink to={currentUser ? '/admin' : '/directory'} > Admin</NavLink> */}
+                <Spacer />
+                <Tabs align='end' variant='enclosed' >
+                    <TabList>
+                        <Tab><NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink></Tab>
+                        <Tab><NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink></Tab>
+                        <Tab><NavLink to={currentUser ? '/requests' : '/landing'}>Maintenance Requests</NavLink></Tab>
+                        <Tab><NavLink to={currentUser ? '/calendar' : '/landing'}>Calendar</NavLink></Tab>
+                        <Tab><NavLink to={currentUser ? '/payments' : '/landing'}>Payment Portal</NavLink></Tab>
+                        {/* <NavLink to={currentUser ? '/admin' : '/directory'} > Admin</NavLink> */}
+                    </TabList>
+                </Tabs>
 
-            {!!currentUser && <button onClick={handleLogout}>Logout</button>}
-            {/* {!!currentUser && <>Hi {currentUser}</>} */}
-            {/* <LinksWrapper>
+                {!!currentUser && <Button variant='outline' colorScheme='blue' onClick={handleLogout}>Logout</Button>}
+                {/* {!!currentUser && <>Hi {currentUser}</>} */}
+                {/* <LinksWrapper>
                     <PrimaryLink to="landing">landing</PrimaryLink>
                     <SecondaryLink to="hello">I should be pink</SecondaryLink>
                 </LinksWrapper>
 
             </HeaderContainer> */}
+            </Flex>
         </>
     )
 }
