@@ -72,27 +72,27 @@ const petData = [
 const requestData = [
     {
         description: 'Looks like the toilet is leaking around the base, and maybe also the shower. Please send someone to take a look',
-        status: 'OPEN',
+        status: 'Open',
         userId: 2,
     },
     {
         description: 'Some of our blinds are broken. One in the second bedroom, and another one in the living room',
-        status: 'OPEN',
+        status: 'Closed',
         userId: 3,
     },
     {
         description: 'We need a new remote opener for the garage',
-        status: 'OPEN',
+        status: 'Open',
         userId: 4,
     },
     {
-        description: 'Our fauce is leaking from the top and also under the sink!',
-        status: 'OPEN',
+        description: 'Our faucet is leaking from the top and also under the sink!',
+        status: 'Scheduled',
         userId: 1,
     },
     {
         description: 'Please send someone to take a look at our furnace, it is not heating up',
-        status: 'OPEN',
+        status: 'Open',
         userId: 2,
     }
 ]

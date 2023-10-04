@@ -1,9 +1,20 @@
 import { useState } from "react";
+import { Td, Select, Badge } from '@chakra-ui/react';
 // import Select from 'react-select';
 
 export const RequestStatus = ({ isEditing, value, onValueChange }) => {
-    // const [select, setSelected] = useState(null);
-
+    const colorMap = {
+        Open: 'blue',
+        OPEN: 'blue',
+        'Under Review': 'yellow',
+        'UNDER REVIEW': 'yellow',
+        'Need More Info': 'red',
+        'NEED MORE INFO': 'red',
+        Scheduled: 'purple',
+        SCHEDULED: 'purple',
+        Closed: 'whatsapp',
+        CLOSED: 'whatsapp'
+    }
     // const options = [
     //     { value: "Open", label: "Open" },
     //     { value: "Under Review", label: "Under Review" },
@@ -16,8 +27,6 @@ export const RequestStatus = ({ isEditing, value, onValueChange }) => {
     //     setSelected(selectedOption);
     //     console.log('Selcted:', selectedOption)
     // }
-
-
     return isEditing ? (
         // <td>
         //     <Select
@@ -28,23 +37,24 @@ export const RequestStatus = ({ isEditing, value, onValueChange }) => {
         //         autoFocus={true}
         //     />
         // </td>
-        <td>
-            <select
+        <Td>
+            <Select
                 name="status"
                 value={value}
                 onChange={(event) => onValueChange(event.target.value)}
                 autoFocus={true}
+                variant='outline'
             >
-                <option value="Open">Open</option>
+                <option value="Open"> Open </option>
                 <option value="Under Review">Under Review</option>
                 <option value="Need More Info">Need More Info</option>
                 <option value="Scheduled">Scheduled</option>
                 <option value="Closed">Closed</option>
-            </select>
-        </td>
+            </Select>
+        </Td>
     ) : (
-        <td>
-            {value}
-        </td>
+        <Td>
+            <Badge size='lg' colorScheme={colorMap[value]}> {value} </Badge>
+        </Td>
     )
 }

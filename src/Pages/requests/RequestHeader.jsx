@@ -1,14 +1,15 @@
-import React from 'react'
+import { Tr, Th } from '@chakra-ui/react'
 
 export const RequestHeader = () => {
     return (
-        <tr>
-            <th>Request ID</th>
-            <th>Date Created</th>
-            <th>Status</th>
-            <th>Description</th>
-            <th></th>
-        </tr>
+        <Tr>
+            <Th>Request ID</Th>
+            <Th>Date Created</Th>
+            <Th> User ID </Th>
+            <Th>Status</Th>
+            <Th>Description</Th>
+            <Th></Th>
+        </Tr>
     )
 }
 

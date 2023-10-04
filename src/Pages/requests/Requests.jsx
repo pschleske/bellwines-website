@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { TableContainer, Table, Thead, Tbody, Tr, Td, Box, Flex, Spacer } from '@chakra-ui/react';
+import { format } from 'date-fns';
 
 import { RequestHeader } from './RequestHeader';
 import { RequestRow } from './RequestRow';
@@ -70,43 +72,49 @@ export const Requests = () => {
 
 
     return (
-        <div>
-            <h3>REQUESTS</h3>
-            <AddButton addClick={addRequestRow} />
-            <table>
-                <thead>
-                    <RequestHeader />
-                </thead>
-                <tbody>
-                    {requestData.map((item) => (
-                        <tr key={item.requestId}
-                            id={item.requestId}>
-                            <td> {item.requestId} </td>
-                            <td> {Date(item.createdAt)} </td>
-                            {/* {console.log(Date(item.createdAt))} */}
-                            {/* <td> {item.status} </td> */}
-                            {/* <RequestStatus
+        <Flex justifyContent="center" width='100%' height="100%" marginTop='2vh'>
+            <TableContainer>
+                <AddButton addClick={addRequestRow} />
+                <br />
+                <Box colorscheme='gray' border='1px solid' borderColor='gray.100' boxShadow='2xl' borderRadius='10px'>
+                    <Table variant='simple' size='lg'>
+                        {/* <TableCaption>REQUESTS</TableCaption> */}
+                        <Thead>
+                            <RequestHeader />
+                        </Thead>
+                        <Tbody>
+                            {requestData.map((item) => (
+                                <Tr key={item.requestId}
+                                    id={item.requestId}>
+                                    <Td> {item.requestId} </Td>
+                                    <Td> {format(new Date(item.createdAt), 'MM/dd/yyyy')} </Td>
+                                    <Td> {item.userId} </Td>
+                                    {/* {console.log(Date(item.createdAt))} */}
+                                    {/* <td> {item.status} </td> */}
+                                    {/* <RequestStatus
                                 isEditing={false}
                                 value={item.status}
                             /> */}
-                            {/* <td> {item.description} </td> */}
-                            <RequestRow
-                                item={item}
-                                initialReqData={{
-                                    status: item.status,
-                                    description: item.description
-                                }}
-                                initialEditing={false}
-                                deleteFunc={() => deleteRequestRow(item.requestId)}
-                            />
-                        </tr>
-                    ))}
-                </tbody>
-                {/* <tfoot>
+                                    {/* <td> {item.description} </td> */}
+                                    <RequestRow
+                                        item={item}
+                                        initialReqData={{
+                                            status: item.status,
+                                            description: item.description
+                                        }}
+                                        initialEditing={false}
+                                        deleteFunc={() => deleteRequestRow(item.requestId)}
+                                    />
+                                </Tr>
+                            ))}
+                        </Tbody>
+                        {/* <tfoot>
                     <AddButton />
                 </tfoot> */}
-            </table>
-        </div>
+                    </Table>
+                </Box>
+            </TableContainer>
+        </Flex >
     )
 }
 
