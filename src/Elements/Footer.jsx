@@ -52,7 +52,7 @@ export const Footer = () => {
                 <Spacer />
 
                 <Box align='end' p='2'>
-                    <Text fontSize='sm' fontWeight='bold'>Contact Us<EmailIcon /></Text>
+                    <Text fontSize='sm' fontWeight='bold'>Contact Us <EmailIcon /></Text>
                     <Link fontSize='sm' href="mailto:bellwines@email.com">Email Us</Link>
                 </Box>
             </HStack>

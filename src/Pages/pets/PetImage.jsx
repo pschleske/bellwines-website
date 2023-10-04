@@ -1,13 +1,18 @@
 import React from 'react'
+import { Image, Input } from '@chakra-ui/react'
 
 export const PetImage = ({ isEditing, value, onValueChange }) => {
     return isEditing ? (
-        <input
+        <Input
             type="text"
             value={value}
             onChange={(event) => onValueChange(event.target.value)}
         />
     ) : (
-        <img src={value} alt="" />
+        <Image src={value}
+            objectFit='cover'
+            maxW={{ base: '200%', sm: '300px' }}
+            maxH={{ base: '200%', sm: '300px' }}
+            alt="dog" />
     )
 }

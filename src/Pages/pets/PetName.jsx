@@ -1,8 +1,9 @@
 import React from 'react'
+import { Input, Heading } from '@chakra-ui/react'
 
 export const PetName = ({ isEditing, value, onValueChange }) => {
     return isEditing ? (
-        <input
+        <Input
             type="text"
             value={value}
             onChange={(event) => {
@@ -10,6 +11,6 @@ export const PetName = ({ isEditing, value, onValueChange }) => {
             }}
         />
     ) : (
-        <span>{value}</span>
+        <Heading size='sm'>{value}</Heading>
     )
 }

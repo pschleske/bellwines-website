@@ -1,7 +1,8 @@
 import React from 'react'
+import { Button } from '@chakra-ui/react'
 
 export const PetAddButton = ({ addClick }) => {
     return (
-        <button onClick={addClick}> Add Pet </button>
+        <Button onClick={addClick} colorScheme='whatsapp' size='sm'> Add Pet </Button>
     )
 }

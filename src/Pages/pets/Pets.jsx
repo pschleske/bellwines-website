@@ -1,6 +1,10 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Card, Box, Flex, TabPanel, Tabs, TabPanels, Button, FormControl, FormLabel, Input, Container } from '@chakra-ui/react';
+import { CloseIcon } from '@chakra-ui/icons';
+import { IconButton } from '@chakra-ui/react';
+
 // import image from '../shared/img123.jpg'
 import { PetAddButton } from './PetAddButton';
 import { Pet } from './Pet';
@@ -55,7 +59,9 @@ export const Pets = () => {
             })
             setPetData([...petData, data])
             setShowAddPet(false)
-
+            setName('')
+            setImgUrl('')
+            setDescription('')
         } catch (error) {
             console.error('Error adding pet:', error)
         }
@@ -89,28 +95,46 @@ export const Pets = () => {
     // create form and conditionally render based on showAdd pet state 
     if (showAddPet === true) {
         return (
-            <form onSubmit={(event) => addPet(event)}>
-                <button onClick={() => setShowAddPet(false)}>x</button>
-                <label htmlFor="">Pet Name:</label>
-                <input
-                    type="text"
-                    value={name}
-                    onChange={(event) => setName(event.target.value)}
-                />
-                <label htmlFor="">Photo:</label>
-                <input
-                    type="text"
-                    value={imgUrl}
-                    onChange={(event) => setImgUrl(event.target.value)}
-                />
-                <label htmlFor="">Tell us about your pet:</label>
-                <input
-                    type="text"
-                    value={description}
-                    onChange={(event) => setDescription(event.target.value)}
-                />
-                <PetAddButton />
-            </form>
+            <Container border='1px' borderColor='gray.100' borderRadius='10px' marginTop='10vh' width='450px' height='550px' boxShadow='md' p='6' rounded='md' bg='white'>
+                <Flex justify='flex-end'>
+                    <IconButton onClick={() => setShowAddPet(false)} icon={<CloseIcon />} size='sm' />
+                </Flex>
+                <Flex justify="center" align="center" height="100%" flexDirection='column' justifyItems='space-around' >
+                    <form >
+                        <FormControl>
+                            <FormLabel htmlFor="">Pet Name:</FormLabel>
+                            <Input
+                                type="text"
+                                value={name}
+                                onChange={(event) => setName(event.target.value)}
+                            />
+                        </FormControl>
+                        <br />
+                        <FormControl>
+                            <FormLabel htmlFor="">Photo:</FormLabel>
+                            <Input
+                                type="text"
+                                value={imgUrl}
+                                onChange={(event) => setImgUrl(event.target.value)}
+                            />
+                        </FormControl>
+                        <br />
+                        <FormControl>
+                            <FormLabel htmlFor="">Tell us about your pet:</FormLabel>
+                            <Input
+                                type="text"
+                                value={description}
+                                onChange={(event) => setDescription(event.target.value)}
+                            />
+                        </FormControl>
+                        <br />
+                        <Flex justifyContent='center'>
+                            {/* <PetAddButton onClick={(event) => addPet(event)} /> */}
+                            <Button onClick={(event) => addPet(event)} colorScheme='whatsapp' size='md'> Create Pet </Button>
+                        </Flex>
+                    </form >
+                </Flex>
+            </Container >
         )
     }
 
@@ -118,29 +142,46 @@ export const Pets = () => {
     // At the moment the only way to get out of this page is by clicking on a different link such as directory and then back to pets 
 
     return (
-        <div>
+        <>
+            <Tabs>
+                <TabPanels>
+                    <TabPanel>
+                        <br />
+                        <Flex justify='center'>
 
-            <PetAddButton addClick={() => setShowAddPet(true)} />
-            <div>
-                {petData.map((petItem) => (
-                    <Pet
-                        key={petItem.petId}
-                        id={petItem.petId}
-                        initialPetData={{
-                            userId: petItem.userId,
-                            name: petItem.name,
-                            imgUrl: petItem.imgUrl,
-                            description: petItem.description,
-                        }}
-                        initialIsEditing={false}
-                        deleteFunc={() => deletePet(petItem.petId)}
-                        currentUserData={currentUser.userId}
+                            <PetAddButton addClick={() => setShowAddPet(true)} />
 
-                    />
-                ))}
-                {/* {console.log(9999, currentUser.userId)} */}
-            </div>
-        </div>
+                        </Flex>
+                        <Flex flexWrap='wrap' justify='space-around'>
+                            {petData.map((petItem) => (
+                                <Box key={petItem.petId} width='calc(45% - 10px)'>
+                                    <br />
+                                    <Card direction={{ base: 'column', sm: 'row' }}
+                                        overflow='hidden'
+                                        variant='outline'
+                                        marginBottom='4'>
+                                        <Pet
+                                            key={petItem.petId}
+                                            id={petItem.petId}
+                                            initialPetData={{
+                                                userId: petItem.userId,
+                                                name: petItem.name,
+                                                imgUrl: petItem.imgUrl,
+                                                description: petItem.description,
+                                            }}
+                                            initialIsEditing={false}
+                                            deleteFunc={() => deletePet(petItem.petId)}
+                                            currentUserData={currentUser.userId}
+                                        />
+                                    </Card>
+                                </Box>
+                            ))}
+                        </Flex>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
+            {/* {console.log(9999, currentUser.userId)} */}
+        </>
     )
 }
 

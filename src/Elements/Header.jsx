@@ -71,7 +71,7 @@ export const Header = () => {
                 {!!currentUser && <> <Heading size='sm'>{currentUser.firstName}'s Account</Heading> </>}
 
                 <Spacer />
-                <Tabs align='end' variant='enclosed' >
+                <Tabs align='end' variant='enclosed' isLazy>
                     <TabList>
                         <Tab><NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink></Tab>
                         <Tab><NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink></Tab>

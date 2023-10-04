@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Card, CardBody, Text, Heading, Image, Box, Flex, Link } from '@chakra-ui/react'
+import { Card, CardBody, Text, Heading, Image, Box, Flex, Link, TabPanel, Tabs, TabPanels } from '@chakra-ui/react'
 // import { useAuth } from '../../shared/contexts/useAuth';
 
 
@@ -65,27 +65,33 @@ export const Directory = () => {
 
     return (
         <>
-            <br />
-            <Flex flexWrap='wrap' gap={4} justifyContent='space-around' alignItems='center'>
-                {directoryData.map((item) => (
-                    <Box key={item.userId} width='calc(25% - 16px'>
-                        <Card >
-                            <br />
-                            <Heading size='xs' textAlign='center'>{item.firstName} {item.lastName}</Heading>
-                            <CardBody>
-                                <Flex direction="column" alignItems="center" justifyContent="center" textAlign="center">
-                                    <Image src={item.imgUrl} boxSize='125px' borderRadius='full' />
-                                    <br />
-                                    <Text fontSize='sm'>Apt: {item.apartmentNumber} </Text>
-                                    {/* <Text fontSize='sm'> {item.email} </Text> */}
-                                    <Link fontSize='sm' href={`mailto:${item.email}`}> {item.email} </Link>
-                                    {/* <Text fontSize='xs'>Pets: {pet[0] && petData(item.userId)}</Text> */}
-                                </Flex>
-                            </CardBody>
-                        </Card>
-                    </Box>
-                ))}
-            </Flex>
+            <Tabs>
+                <TabPanels>
+                    <TabPanel>
+                        <br />
+                        <Flex flexWrap='wrap' gap={4} justifyContent='space-around' alignItems='center'>
+                            {directoryData.map((item) => (
+                                <Box key={item.userId} width='calc(25% - 10px)'>
+                                    <Card >
+                                        <br />
+                                        <Heading size='xs' textAlign='center'>{item.firstName} {item.lastName}</Heading>
+                                        <CardBody>
+                                            <Flex direction="column" alignItems="center" justifyContent="center" textAlign="center">
+                                                <Image src={item.imgUrl} boxSize='125px' borderRadius='full' />
+                                                <br />
+                                                <Text fontSize='sm'>Apt: {item.apartmentNumber} </Text>
+                                                {/* <Text fontSize='sm'> {item.email} </Text> */}
+                                                <Link fontSize='sm' href={`mailto:${item.email}`}> {item.email} </Link>
+                                                {/* <Text fontSize='xs'>Pets: {pet[0] && petData(item.userId)}</Text> */}
+                                            </Flex>
+                                        </CardBody>
+                                    </Card>
+                                </Box>
+                            ))}
+                        </Flex>
+                    </TabPanel>
+                </TabPanels>
+            </Tabs>
         </>
     );
 

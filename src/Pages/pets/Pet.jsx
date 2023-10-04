@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-// import PetName from './PetName';
-// import PetImage from './PetImage';
-// import PetDescription from './PetDescription';
-// import PetModeButtons from './PetModeButtons';
+import { CardBody, CardFooter, Stack, Flex } from '@chakra-ui/react';
+
 import { PetName } from './PetName';
 import { PetImage } from './PetImage';
 import { PetDescription } from './PetDescription';
@@ -41,30 +39,35 @@ export const Pet = ({ initialPetData, initialIsEditing, deleteFunc, id, currentU
 
     return (
         <>
-            <h4>Pet</h4>
-            <PetName
-                isEditing={editMode}
-                value={name}
-                onValueChange={setName}
-            />
             <PetImage
                 isEditing={editMode}
                 value={imgUrl}
                 onValueChange={setImgUrl}
             />
-            <PetDescription
-                isEditing={editMode}
-                value={description}
-                onValueChange={setDescription}
-            />
-            {isOwner && (
-                <PetModeButtons
-                    isEditing={editMode}
-                    saveClick={changeNormalMode}
-                    editClick={changeEditMode}
-                    deleteClick={deleteFunc}
-                />
-            )}
+            <Stack>
+                <CardBody>
+                    <PetName
+                        isEditing={editMode}
+                        value={name}
+                        onValueChange={setName}
+                    />
+                    <PetDescription
+                        isEditing={editMode}
+                        value={description}
+                        onValueChange={setDescription}
+                    />
+                </CardBody>
+                <CardFooter>
+                    {isOwner && (
+                        <PetModeButtons
+                            isEditing={editMode}
+                            saveClick={changeNormalMode}
+                            editClick={changeEditMode}
+                            deleteClick={deleteFunc}
+                        />
+                    )}
+                </CardFooter>
+            </Stack>
         </>
     )
 }
