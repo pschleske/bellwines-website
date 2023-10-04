@@ -158,7 +158,7 @@ export const PaymentPortal = () => {
                                 <Tfoot>
                                     <Tr>
                                         <Td><Heading size='sm'>Total:</Heading></Td>
-                                        <Td key="total" value={1650}>$1,650</Td>
+                                        <Td key="total" value={1650}><Heading size='sm'>$1,650</Heading></Td>
                                     </Tr>
                                 </Tfoot>
                             </Table>
