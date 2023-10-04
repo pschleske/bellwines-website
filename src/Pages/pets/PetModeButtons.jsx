@@ -8,8 +8,8 @@ export const PetModeButtons = ({ isEditing, editClick, saveClick, deleteClick })
         </>
     ) : (
         <>
-            <Button onClick={editClick} colorScheme='blue' size='sm'> Edit </Button>
-            <Button onClick={deleteClick} colorScheme='pink' size='sm'> Delete </Button>
+            <Button onClick={editClick} colorScheme='blue' size='sm' variant='outline'> Edit </Button>
+            <Button onClick={deleteClick} colorScheme='pink' size='sm' variant='outline'> Delete </Button>
         </>
     )
 }
