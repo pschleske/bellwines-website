@@ -70,6 +70,7 @@ export const Directory = () => {
                 {directoryData.map((item) => (
                     <Box key={item.userId} width='calc(25% - 16px'>
                         <Card >
+                            <br />
                             <Heading size='xs' textAlign='center'>{item.firstName} {item.lastName}</Heading>
                             <CardBody>
                                 <Flex direction="column" alignItems="center" justifyContent="center" textAlign="center">
