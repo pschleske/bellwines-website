@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Card, CardBody, Text, Heading, Image, Box, Flex, Link } from '@chakra-ui/react'
 // import { useAuth } from '../../shared/contexts/useAuth';
 
 
@@ -36,16 +37,16 @@ export const Directory = () => {
         }
     }
 
-    const petData = (id) => {
+    // const petData = (id) => {
 
-        return pet.map((item) => {
-            if (item.userId === id) {
-                return (
-                    <p key={item.petId}>{item.name}</p>
-                )
-            }
-        })
-    }
+    //     return pet.map((item) => {
+    //         if (item.userId === id) {
+    //             return (
+    //                 <p key={item.petId}>{item.name}</p>
+    //             )
+    //         }
+    //     })
+    // }
 
     // console.log('Directory current user:', currentUser.isAdmin)
     // const isUserAdmin = () => {
@@ -63,20 +64,28 @@ export const Directory = () => {
     // }, [])
 
     return (
-        <div>
-            <h3>Directory</h3>
-            <div>
+        <>
+            <br />
+            <Flex flexWrap='wrap' gap={4} justifyContent='space-around' alignItems='center'>
                 {directoryData.map((item) => (
-                    <div key={item.userId}>
-                        <img src={item.imgUrl} />
-                        <strong>First Name:</strong> {item.firstName} <br />
-                        <strong>Last Name:</strong> {item.lastName} <br />
-                        <strong>Apt #:</strong> {item.apartmentNumber}
-                        <div><strong>Pets:</strong>{pet[0] && petData(item.userId)}</div>
-                    </div>
+                    <Box key={item.userId} width='calc(25% - 16px'>
+                        <Card >
+                            <Heading size='xs' textAlign='center'>{item.firstName} {item.lastName}</Heading>
+                            <CardBody>
+                                <Flex direction="column" alignItems="center" justifyContent="center" textAlign="center">
+                                    <Image src={item.imgUrl} boxSize='125px' borderRadius='full' />
+                                    <br />
+                                    <Text fontSize='sm'>Apt: {item.apartmentNumber} </Text>
+                                    {/* <Text fontSize='sm'> {item.email} </Text> */}
+                                    <Link fontSize='sm' href={`mailto:${item.email}`}> {item.email} </Link>
+                                    {/* <Text fontSize='xs'>Pets: {pet[0] && petData(item.userId)}</Text> */}
+                                </Flex>
+                            </CardBody>
+                        </Card>
+                    </Box>
                 ))}
-            </div>
-        </div>
+            </Flex>
+        </>
     );
 
     // adminMode ? (
