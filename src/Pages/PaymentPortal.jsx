@@ -5,6 +5,9 @@ import {
     useStripe,
     useElements
 } from '@stripe/react-stripe-js';
+import { TableContainer, Table, Thead, Tbody, Tfoot, Tr, Th, Td, Heading, Flex, Container, TableCaption, Spacer, Button } from "@chakra-ui/react";
+
+import './paymentPortal.css';
 
 export const PaymentPortal = () => {
     const stripe = useStripe();
@@ -86,55 +89,84 @@ export const PaymentPortal = () => {
 
     return (
         <>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Invoice Items</th>
-                        <th>Amount</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Rent:</td>
-                        <td>$1,500</td>
-                    </tr>
-                    <tr>
-                        <td>Parking:</td>
-                        <td>$50</td>
-                    </tr>
-                    <tr>
-                        <td>Internet:</td>
-                        <td>$50</td>
-                    </tr>
-                    <tr>
-                        <td>Pet Rent:</td>
-                        <td>$50</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Total:</th>
-                        <td key="total" value={1650}>$1,650</td>
-                    </tr>
-                </tfoot>
-            </table>
-            <br />
-            <div className="App">
-                <form id="payment-form" onSubmit={handleSubmit}>
-                    <LinkAuthenticationElement
-                        id="link-authentication-element"
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                    <PaymentElement id="payment-element" options={paymentElementOptions} />
-                    <button disabled={isLoading || !stripe || !elements} id="submit">
-                        <span id="button-text">
-                            {isLoading ? <div className="spinner" id="spinner"></div> : "Pay $1,650"}
-                        </span>
-                    </button>
-                    {/* Show any error or success messages */}
-                    {message && <div id="payment-message">{message}</div>}
-                </form>
-            </div>
+            <Container colorscheme='gray' border='1px solid' borderColor='gray.100' borderRadius='10px' boxShadow='lg' marginTop='5vh'>
+                <br />
+                <Flex justifyContent='center'>
+                    <Heading size='md'>Monthly Rent Payment</Heading>
+                </Flex>
+                <br />
+                <Flex>
+                    <Container colorscheme='gray' border='1px solid' borderColor='gray.100' borderRadius='10px'>
+                        <div className="App">
+                            {/* <form id="payment-form" onSubmit={handleSubmit}> */}
+                            <form id="payment-form">
+                                <br />
+                                <LinkAuthenticationElement
+                                    id="link-authentication-element"
+                                    onChange={(e) => setEmail(e.target.value)}
+                                />
+                                <PaymentElement id="payment-element" options={paymentElementOptions} />
+                                <br />
+                                <Flex justifyContent='center'>
+                                    <Button onClick={handleSubmit} disabled={isLoading || !stripe || !elements} id="stripeBtn" colorScheme='facebook'>
+                                        <span id="button-text">
+                                            {isLoading ? <div className="spinner" id="spinner"></div> : "Pay $1,650"}
+                                        </span>
+                                    </Button>
+                                </Flex>
+                                {/* Show any error or success messages */}
+                                {message && <div id="payment-message">{message}</div>}
+                            </form>
+                            <br />
+                        </div>
+                    </Container>
+                </Flex>
+                <br />
+                <Flex justifyContent="center" marginTop='2vh'>
+                    <Container colorscheme='gray' border='1px solid' borderColor='gray.100' borderRadius='10px'>
+                        <TableContainer>
+                            <Table variant='simple'>
+                                <TableCaption>
+                                    *Automatic monthly payments are not yet available
+                                    <Spacer />
+                                    *This payment will only process once
+                                </TableCaption>
+                                <Thead>
+                                    <Tr>
+                                        <Th>Invoice Items</Th>
+                                        <Th>Amount</Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    <Tr>
+                                        <Td>Rent:</Td>
+                                        <Td>$1,500</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Parking:</Td>
+                                        <Td>$50</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Internet:</Td>
+                                        <Td>$50</Td>
+                                    </Tr>
+                                    <Tr>
+                                        <Td>Pet Rent:</Td>
+                                        <Td>$50</Td>
+                                    </Tr>
+                                </Tbody>
+                                <Tfoot>
+                                    <Tr>
+                                        <Td><Heading size='sm'>Total:</Heading></Td>
+                                        <Td key="total" value={1650}>$1,650</Td>
+                                    </Tr>
+                                </Tfoot>
+                            </Table>
+                        </TableContainer>
+                    </Container>
+                </Flex>
+                <br />
+            </Container >
         </>
     )
 }
