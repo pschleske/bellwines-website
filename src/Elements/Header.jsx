@@ -6,8 +6,9 @@ import { useAuth } from '../shared/contexts/useAuth';
 import {
     Flex, Box, Spacer, Heading,
     Tabs, TabList, Tab,
-    Button
+    Button, IconButton
 } from '@chakra-ui/react';
+import { AtSignIcon } from '@chakra-ui/icons';
 
 // const HeaderContainer = styled.div`
 //   height: 80px;
@@ -63,7 +64,9 @@ export const Header = () => {
             <Flex minWidth='max-content' alignItems='center' gap='2' h='100px' borderBottom='1px' borderColor='gray.100'>
                 <Box p='2'>
                     <Link to={currentUser ? '/directory' : '/'}>
-                        <Heading size='lg'>Bellwines</Heading>
+                        <Heading size='lg' color='blue.700'>
+                            <IconButton colorScheme='blue' variant='outline' size='md' icon={<AtSignIcon />} />  Bellwines Apartments
+                        </Heading>
                     </Link>
                 </Box>
                 <Spacer />
@@ -71,12 +74,12 @@ export const Header = () => {
                 {!!currentUser && <> <Heading size='sm'>{currentUser.firstName}'s Account</Heading> </>}
 
                 <Spacer />
-                <Tabs align='end' variant='enclosed' isLazy>
+                <Tabs align='end' variant='soft-rounded' isLazy>
                     <TabList>
                         <Tab><NavLink to={currentUser ? '/directory' : '/landing'}>Directory</NavLink></Tab>
                         <Tab><NavLink to={currentUser ? '/pets' : '/landing'}>Meet the Pets</NavLink></Tab>
                         <Tab><NavLink to={currentUser ? '/requests' : '/landing'}>Maintenance Requests</NavLink></Tab>
-                        <Tab><NavLink to={currentUser ? '/calendar' : '/landing'}>Calendar</NavLink></Tab>
+                        <Tab><NavLink to={currentUser ? '/calendar' : '/landing'}>Event Calendar</NavLink></Tab>
                         <Tab><NavLink to={currentUser ? '/payments' : '/landing'}>Payment Portal</NavLink></Tab>
                         {/* <NavLink to={currentUser ? '/admin' : '/directory'} > Admin</NavLink> */}
                     </TabList>
