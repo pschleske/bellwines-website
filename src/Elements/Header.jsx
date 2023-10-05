@@ -4,11 +4,9 @@ import axios from 'axios';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../shared/contexts/useAuth';
 import {
-    Flex, Box, Spacer, Heading,
-    Tabs, TabList, Tab,
-    Button, IconButton
+    Flex, Box, Spacer, Heading, Tabs, TabList, Tab, Button, IconButton, Menu, MenuButton, MenuList, MenuItem,
 } from '@chakra-ui/react';
-import { AtSignIcon } from '@chakra-ui/icons';
+import { AtSignIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
 // const HeaderContainer = styled.div`
 //   height: 80px;
@@ -71,7 +69,7 @@ export const Header = () => {
                 </Box>
                 <Spacer />
 
-                {!!currentUser && <> <Heading size='sm'>{currentUser.firstName}'s Account</Heading> </>}
+                {/* {!!currentUser && <> <Heading size='sm'>{currentUser.firstName}'s Account</Heading> </>} */}
 
                 <Spacer />
                 <Tabs align='end' variant='soft-rounded' isLazy>
@@ -85,7 +83,17 @@ export const Header = () => {
                     </TabList>
                 </Tabs>
 
-                {!!currentUser && <Button variant='outline' colorScheme='blue' onClick={handleLogout}>Logout</Button>}
+                {/* {!!currentUser && <Button variant='outline' colorScheme='blue' onClick={handleLogout}>Logout</Button>} */}
+                {!!currentUser && <Menu>
+                    <MenuButton px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'blue.100' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }} >
+                        {currentUser.firstName} {currentUser.lastName} <ChevronDownIcon />
+                    </MenuButton>
+                    <MenuList>
+                        <MenuItem>
+                            <Button variant='ghost' colorScheme='blue' onClick={handleLogout}>Logout</Button>
+                        </MenuItem>
+                    </MenuList>
+                </Menu>}
                 {/* {!!currentUser && <>Hi {currentUser}</>} */}
                 {/* <LinksWrapper>
                     <PrimaryLink to="landing">landing</PrimaryLink>
