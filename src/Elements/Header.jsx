@@ -85,7 +85,7 @@ export const Header = () => {
 
                 {/* {!!currentUser && <Button variant='outline' colorScheme='blue' onClick={handleLogout}>Logout</Button>} */}
                 {!!currentUser && <Menu>
-                    <MenuButton px={4} py={2} transition='all 0.2s' borderRadius='md' borderWidth='1px' _hover={{ bg: 'blue.100' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }} >
+                    <MenuButton as={Button} backgroundColor='blue.50' px={4} py={2} transition='all 0.2s' borderRadius='md' _hover={{ bg: 'blue.100' }} _expanded={{ bg: 'blue.400' }} _focus={{ boxShadow: 'outline' }} >
                         {currentUser.firstName} {currentUser.lastName} <ChevronDownIcon />
                     </MenuButton>
                     <MenuList>
@@ -94,6 +94,7 @@ export const Header = () => {
                         </MenuItem>
                     </MenuList>
                 </Menu>}
+                <br />
                 {/* {!!currentUser && <>Hi {currentUser}</>} */}
                 {/* <LinksWrapper>
                     <PrimaryLink to="landing">landing</PrimaryLink>
