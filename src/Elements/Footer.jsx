@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Box, Text, Button, Link, HStack, Spacer } from '@chakra-ui/react';
+import { Box, Text, Button, Link, HStack, Flex, Image, Spacer } from '@chakra-ui/react';
 import { EmailIcon } from '@chakra-ui/icons';
 import axios from 'axios';
 
@@ -42,19 +42,31 @@ export const Footer = () => {
             right="0"
             width="100%"
             h='150px' >
-            <HStack spacing='4'>
-                <Box as='footer' p='2' >
-                    <Text fontSize='xs' fontWeight='bold'>Quote of the day:</Text>
-                    <Text fontSize='xs'>{quote[quotes]}</Text>
-                    <Button onClick={changeQuotes} size='xs' colorScheme='blue' variant='outline'>New Quote</Button>
+            <HStack spacing='3'>
+
+                <Flex p='1' justifyContent='center' alignItems='center'>
+                    <Image src='https://cdn-icons-png.flaticon.com/512/5988/5988529.png' alt='apartments' isRound boxSize='60px' />
+                    <Text fontSize='sm' fontWeight='bold' > Bellwines Apartments </Text>
+                </Flex>
+
+                <Spacer />
+
+                <Box as='footer' p='1' >
+                    <Text fontSize='xs' fontWeight='bold' align='center' >Quote of the day:</Text>
+                    <Text fontSize='xs' align='center' >{quote[quotes]}</Text>
+                    <br />
+                    <Flex justifyContent='center'>
+                        <Button onClick={changeQuotes} size='xs' colorScheme='blue' variant='outline'>New Quote</Button>
+                    </Flex>
                 </Box >
 
                 <Spacer />
 
-                <Box align='end' p='2'>
+                <Box p='1'>
                     <Text fontSize='sm' fontWeight='bold'>Contact Us <EmailIcon /></Text>
                     <Link fontSize='sm' href="mailto:bellwines@email.com">Email Us</Link>
                 </Box>
+
             </HStack>
         </Box >
     )
