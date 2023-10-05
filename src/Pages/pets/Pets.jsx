@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Card, Box, Flex, TabPanel, Tabs, TabPanels, Button, FormControl, FormLabel, Input, Container } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
-import { IconButton } from '@chakra-ui/react';
+import { IconButton, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 
 // import image from '../shared/img123.jpg'
 import { PetAddButton } from './PetAddButton';
@@ -17,6 +17,8 @@ export const Pets = () => {
     const [name, setName] = useState('')
     const [imgUrl, setImgUrl] = useState('')
     const [description, setDescription] = useState('')
+
+    const [showAlert, setShowAlert] = useState(false)
 
     const { currentUser, setCurrentUser } = useAuth()
 
@@ -48,7 +50,8 @@ export const Pets = () => {
         console.log('hit ADD PET!!!!!!')
         try {
             if (!name || !imgUrl || !description) {
-                alert('Please fill out all fields before adding a pet')
+                setShowAlert('true')
+                // alert('Please fill out all fields before adding a pet')
                 return;
             }
 
@@ -95,46 +98,55 @@ export const Pets = () => {
     // create form and conditionally render based on showAdd pet state 
     if (showAddPet === true) {
         return (
-            <Container border='1px' borderColor='gray.100' borderRadius='10px' marginTop='10vh' width='450px' height='550px' boxShadow='md' p='6' rounded='md' bg='white'>
-                <Flex justify='flex-end'>
-                    <IconButton onClick={() => setShowAddPet(false)} icon={<CloseIcon />} size='sm' />
-                </Flex>
-                <Flex justify="center" align="center" height="100%" flexDirection='column' justifyItems='space-around' >
-                    <form >
-                        <FormControl>
-                            <FormLabel htmlFor="">Pet Name:</FormLabel>
-                            <Input
-                                type="text"
-                                value={name}
-                                onChange={(event) => setName(event.target.value)}
-                            />
-                        </FormControl>
-                        <br />
-                        <FormControl>
-                            <FormLabel htmlFor="">Photo:</FormLabel>
-                            <Input
-                                type="text"
-                                value={imgUrl}
-                                onChange={(event) => setImgUrl(event.target.value)}
-                            />
-                        </FormControl>
-                        <br />
-                        <FormControl>
-                            <FormLabel htmlFor="">Tell us about your pet:</FormLabel>
-                            <Input
-                                type="text"
-                                value={description}
-                                onChange={(event) => setDescription(event.target.value)}
-                            />
-                        </FormControl>
-                        <br />
-                        <Flex justifyContent='center'>
-                            {/* <PetAddButton onClick={(event) => addPet(event)} /> */}
-                            <Button onClick={(event) => addPet(event)} colorScheme='whatsapp' size='md'> Create Pet </Button>
-                        </Flex>
-                    </form >
-                </Flex>
-            </Container >
+            <>
+                {showAlert && (
+                    <Alert status='error'>
+                        <AlertIcon />
+                        <AlertTitle>Error!</AlertTitle>
+                        <AlertDescription>Please fill out all fields before creating pet</AlertDescription>
+                    </Alert>
+                )}
+                <Container border='1px' borderColor='gray.100' borderRadius='10px' marginTop='10vh' width='450px' height='550px' boxShadow='md' p='6' rounded='md' bg='white'>
+                    <Flex justify='flex-end'>
+                        <IconButton onClick={() => { setShowAddPet(false); setShowAlert(false) }} icon={<CloseIcon />} size='sm' />
+                    </Flex>
+                    <Flex justify="center" align="center" height="100%" flexDirection='column' justifyItems='space-around' >
+                        <form >
+                            <FormControl>
+                                <FormLabel htmlFor="">Pet Name:</FormLabel>
+                                <Input
+                                    type="text"
+                                    value={name}
+                                    onChange={(event) => setName(event.target.value)}
+                                />
+                            </FormControl>
+                            <br />
+                            <FormControl>
+                                <FormLabel htmlFor="">Photo:</FormLabel>
+                                <Input
+                                    type="text"
+                                    value={imgUrl}
+                                    onChange={(event) => setImgUrl(event.target.value)}
+                                />
+                            </FormControl>
+                            <br />
+                            <FormControl>
+                                <FormLabel htmlFor="">Tell us about your pet:</FormLabel>
+                                <Input
+                                    type="text"
+                                    value={description}
+                                    onChange={(event) => setDescription(event.target.value)}
+                                />
+                            </FormControl>
+                            <br />
+                            <Flex justifyContent='center'>
+                                {/* <PetAddButton onClick={(event) => addPet(event)} /> */}
+                                <Button onClick={(event) => addPet(event)} colorScheme='whatsapp' size='md'> Create Pet </Button>
+                            </Flex>
+                        </form >
+                    </Flex>
+                </Container >
+            </>
         )
     }
 
