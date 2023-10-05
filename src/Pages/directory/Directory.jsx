@@ -65,6 +65,11 @@ export const Directory = () => {
 
     return (
         <>
+            <br />
+            <br />
+            <Flex marginLeft='6%'>
+                <Heading size='lg' color='gray.600' borderBottom='1px' borderColor='gray.100' > Directory </Heading>
+            </Flex>
             <Tabs>
                 <TabPanels>
                     <TabPanel>

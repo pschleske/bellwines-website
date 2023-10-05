@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { Card, Box, Flex, TabPanel, Tabs, TabPanels, Button, FormControl, FormLabel, Input, Container } from '@chakra-ui/react';
+import { Card, Box, Flex, TabPanel, Tabs, TabPanels, Button, FormControl, FormLabel, Input, Container, Heading } from '@chakra-ui/react';
 import { CloseIcon } from '@chakra-ui/icons';
 import { IconButton, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 
@@ -155,15 +155,21 @@ export const Pets = () => {
 
     return (
         <>
+            <br />
+            <br />
+            <Flex marginLeft='6%' justifyContent='space-between' marginRight='5%'>
+                <Heading size='lg' color='gray.600' borderBottom='1px' borderColor='gray.100' > Meet the Pets </Heading>
+                <PetAddButton addClick={() => setShowAddPet(true)} />
+            </Flex>
             <Tabs>
                 <TabPanels>
                     <TabPanel>
-                        <br />
-                        <Flex justify='center'>
+
+                        {/* <Flex justifyContent='flex-end' marginRight='3%'>
 
                             <PetAddButton addClick={() => setShowAddPet(true)} />
 
-                        </Flex>
+                        </Flex> */}
                         <Flex flexWrap='wrap' justify='space-around'>
                             {petData.map((petItem) => (
                                 <Box key={petItem.petId} width='calc(45% - 10px)'>

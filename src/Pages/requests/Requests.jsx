@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import { TableContainer, Table, Thead, Tbody, Tr, Td, Box, Flex, Spacer } from '@chakra-ui/react';
+import { TableContainer, Table, Thead, Tbody, Tr, Td, TableCaption, Box, Flex, Heading, Spacer } from '@chakra-ui/react';
 import { format } from 'date-fns';
 
 import { RequestHeader } from './RequestHeader';
@@ -9,7 +9,7 @@ import { RequestRow } from './RequestRow';
 // import { RequestDescription } from './RequestDescription';
 // import { RequestStatus } from './RequestStatus';
 // import { ModeButtons } from './ModeButtons';
-import { AddButton } from './AddButton';
+// import { AddButton } from './AddButton';
 // import { useAuth } from '../../shared/contexts/useAuth';
 
 export const Requests = () => {
@@ -74,13 +74,17 @@ export const Requests = () => {
     return (
         <Flex justifyContent="center" width='100%' height="100%" marginTop='2vh'>
             <TableContainer>
-                <AddButton addClick={addRequestRow} />
+                <br />
+                <Heading size='lg' color='gray.600' borderBottom='1px' borderColor='gray.100' > Maintenance Requests </Heading>
                 <br />
                 <Box colorscheme='gray' border='1px solid' borderColor='gray.100' boxShadow='2xl' borderRadius='10px'>
                     <Table variant='simple' size='lg'>
+                        {/* <TableCaption>
+                            <AddButton addClick={addRequestRow} justify='flex-end' />
+                        </TableCaption> */}
                         {/* <TableCaption>REQUESTS</TableCaption> */}
                         <Thead>
-                            <RequestHeader />
+                            <RequestHeader addClick={addRequestRow} />
                         </Thead>
                         <Tbody>
                             {requestData.map((item) => (
