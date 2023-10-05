@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useAuth } from '../shared/contexts/useAuth';
 import {
-    Flex, Box, Spacer, Heading, Tabs, TabList, Tab, Button, IconButton, Menu, MenuButton, MenuList, MenuItem,
+    Flex, Box, Spacer, Heading, Tabs, TabList, Tab, Button, IconButton, Menu, MenuButton, MenuList, MenuItem, Image
 } from '@chakra-ui/react';
 import { AtSignIcon, ChevronDownIcon } from '@chakra-ui/icons';
 
@@ -62,9 +62,13 @@ export const Header = () => {
             <Flex minWidth='max-content' alignItems='center' gap='2' h='100px' borderBottom='1px' borderColor='gray.100'>
                 <Box p='2'>
                     <Link to={currentUser ? '/directory' : '/'}>
-                        <Heading size='lg' color='blue.700'>
-                            <IconButton colorScheme='blue' variant='outline' size='md' icon={<AtSignIcon />} />  Bellwines Apartments
-                        </Heading>
+                        <Flex justifyContent='center' alignItems='center'>
+                            <Image src='https://cdn-icons-png.flaticon.com/512/5988/5988529.png' alt='apartments' isRound boxSize='60px' />
+                            <Heading size='lg' color='blue.700'>
+                                Bellwines Apartments
+                                {/* <IconButton colorScheme='blue' variant='outline' size='md' icon={<AtSignIcon />} />  Bellwines Apartments */}
+                            </Heading>
+                        </Flex>
                     </Link>
                 </Box>
                 <Spacer />
