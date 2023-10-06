@@ -27,15 +27,15 @@ export const Directory = () => {
     }, []);
 
 
-    const getPetNames = async () => {
-        try {
-            const response = await axios.get('/api/pet-owners')
-            // console.log(response.data)
-            setPet(response.data)
-        } catch (error) {
-            alert('Error getting data', error)
-        }
-    }
+    // const getPetNames = async () => {
+    //     try {
+    //         const response = await axios.get('/api/pet-owners')
+    //         // console.log(response.data)
+    //         setPet(response.data)
+    //     } catch (error) {
+    //         alert('Error getting data', error)
+    //     }
+    // }
 
     // const petData = (id) => {
 
@@ -55,9 +55,9 @@ export const Directory = () => {
     //     }
     // }
 
-    useEffect(() => {
-        getPetNames();
-    }, [])
+    // useEffect(() => {
+    //     getPetNames();
+    // }, [])
 
     // useEffect(() => {
     //     isUserAdmin();
@@ -65,9 +65,8 @@ export const Directory = () => {
 
     return (
         <>
-            <br />
-            <br />
-            <Flex marginLeft='6%'>
+
+            <Flex marginTop='3%' marginLeft='6%'>
                 <Heading size='lg' color='gray.600' borderBottom='1px' borderColor='gray.100' > Directory </Heading>
             </Flex>
             <Tabs>

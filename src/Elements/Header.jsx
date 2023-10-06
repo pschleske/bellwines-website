@@ -6,7 +6,7 @@ import { useAuth } from '../shared/contexts/useAuth';
 import {
     Flex, Box, Spacer, Heading, Tabs, TabList, Tab, Button, IconButton, Menu, MenuButton, MenuList, MenuItem, Image
 } from '@chakra-ui/react';
-import { AtSignIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { ChevronDownIcon } from '@chakra-ui/icons';
 
 // const HeaderContainer = styled.div`
 //   height: 80px;
@@ -93,6 +93,9 @@ export const Header = () => {
                         {currentUser.firstName} {currentUser.lastName} <ChevronDownIcon />
                     </MenuButton>
                     <MenuList>
+                        <MenuItem>
+                            <NavLink to='/profile'><Button variant='ghost' colorScheme='blue' onClick>Profile</Button></NavLink>
+                        </MenuItem>
                         <MenuItem>
                             <Button variant='ghost' colorScheme='blue' onClick={handleLogout}>Logout</Button>
                         </MenuItem>

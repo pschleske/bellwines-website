@@ -10,6 +10,7 @@ import { Header } from './Elements/Header';
 import { Footer } from './Elements/Footer';
 import { Landing } from './Pages/landing/Landing';
 import { Directory } from './Pages/directory/Directory';
+import { Profile } from './Pages/directory/Profile';
 import { Pets } from './Pages/pets/Pets';
 import { Requests } from './Pages/requests/Requests';
 import { Calendar } from './Pages/Calendar';
@@ -59,8 +60,8 @@ function App() {
                     <Route index element={currentUser ? <Navigate to='/directory' /> : <Home />} />
                     <Route path='/' element={<Home />} />
                     <Route path='/landing' element={<Landing />} />
-                    <Route path='/directory' element={<Directory />}
-                    />
+                    <Route path='/directory' element={<Directory />} />
+                    <Route path='/profile' element={<Profile />} />
                     <Route path='/pets' element={<Pets />} />
                     <Route path='/requests' element={<Requests />} />
                     {/* <Route path='/admin' element={<Admin />} /> */}

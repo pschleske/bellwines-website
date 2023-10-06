@@ -89,9 +89,8 @@ export const PaymentPortal = () => {
 
     return (
         <>
-            <br />
-            <br />
-            <Flex marginLeft='6%'>
+
+            <Flex marginTop='3%' marginLeft='6%'>
                 <Heading size='lg' color='gray.600' borderBottom='1px' borderColor='gray.100' > Payment Portal </Heading>
             </Flex>
             <Container colorscheme='gray' border='1px solid' borderColor='gray.100' borderRadius='10px' boxShadow='lg' marginTop='5vh'>

@@ -67,7 +67,7 @@ export const Home = () => {
                                 boxShadow="md"
                                 as={Link}
                                 zIndex={55555555}
-                                as="a"
+                                // as="a"
                                 href="mailto:bellwines@email.com"
                             >
                                 Email us!

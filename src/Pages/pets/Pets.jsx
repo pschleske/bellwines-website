@@ -155,9 +155,8 @@ export const Pets = () => {
 
     return (
         <>
-            <br />
-            <br />
-            <Flex marginLeft='6%' justifyContent='space-between' marginRight='5%'>
+
+            <Flex marginTop='3%' marginLeft='6%' justifyContent='space-between' marginRight='5%'>
                 <Heading size='lg' color='gray.600' borderBottom='1px' borderColor='gray.100' > Meet the Pets </Heading>
                 <PetAddButton addClick={() => setShowAddPet(true)} />
             </Flex>

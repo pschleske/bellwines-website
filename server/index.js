@@ -7,6 +7,7 @@ import authCtrl from './controller/authCtrl.js';
 import petCtrl from './controller/petCtrl.js';
 import maintenanceCtrl from './controller/maintenanceCtrl.js';
 import adminCtrl from './controller/adminCtrl.js';
+import profileCtrl from './controller/profileCtrl.js';
 
 // set up instance
 const app = express();
@@ -18,6 +19,7 @@ const { allUsers, register, login, checkUser, logout, isAdmin } = authCtrl;
 const { allPets, addPet, removePet, updatePet, getPetOwners } = petCtrl;
 const { allRequests, addRequest, updateRequest, removeRequest } = maintenanceCtrl;
 const { adminRequests, adminPets, adminDirectory } = adminCtrl;
+const { oneUser, updateProfile } = profileCtrl;
 
 //set up middleware
 app.use(express.urlencoded({ extended: false }));
@@ -100,7 +102,9 @@ app.get('/api/admin', adminRequests)
 app.get('/api/admin1', adminPets)
 app.get('/api/admin2', adminDirectory)
 
-//Message routes below  
+//Profile routes below  
+app.get('/api/profile', oneUser)
+app.put('/api/save-profile', updateProfile)
 
 
 // open up server 
