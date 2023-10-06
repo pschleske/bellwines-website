@@ -96,7 +96,7 @@ export const PaymentPortal = () => {
             <Container colorscheme='gray' border='1px solid' borderColor='gray.100' borderRadius='10px' boxShadow='lg' marginTop='5vh'>
                 <br />
                 <Flex justifyContent='center'>
-                    <Heading size='md'>Monthly Rent</Heading>
+                    <Heading size='md' color='blue.700'>Monthly Rent</Heading>
                 </Flex>
                 <br />
                 <Flex>
