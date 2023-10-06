@@ -15,9 +15,8 @@ import { Requests } from './Pages/requests/Requests';
 import { Calendar } from './Pages/Calendar';
 import { PaymentPortal } from './Pages/PaymentPortal';
 import { PaymentSuccess } from './Pages/PaymentSuccess';
-import { ColorBlob } from './Elements/ColorBlob';
 // import { Admin } from './Pages/Admin'
-// import { Home } from './Pages/Home';
+import { Home } from './Pages/Home';
 import { AuthProvider } from './shared/contexts/useAuth';
 import { useAuth } from './shared/contexts/useAuth';
 
@@ -55,12 +54,11 @@ function App() {
             <Elements options={options} stripe={stripePromise}>
               <Tabs isLazy>
                 <TabPanels>
-                  {/* <ColorBlob /> */}
                   <Header />
                   <Routes>
-                    <Route index element={currentUser ? <Navigate to='/directory' /> : <Landing />} />
+                    <Route index element={currentUser ? <Navigate to='/directory' /> : <Home />} />
+                    <Route path='/' element={<Home />} />
                     <Route path='/landing' element={<Landing />} />
-                    <Route path='/' />
                     <Route path='/directory' element={<Directory />}
                     />
                     <Route path='/pets' element={<Pets />} />

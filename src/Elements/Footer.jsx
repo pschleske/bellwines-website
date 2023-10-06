@@ -63,7 +63,7 @@ export const Footer = () => {
                 <Spacer />
 
                 <Box p='1'>
-                    <Text fontSize='sm' fontWeight='bold'>Contact Us <EmailIcon /></Text>
+                    <Text fontSize='sm' fontWeight='bold'>Contact Bellwines <EmailIcon /></Text>
                     <Link fontSize='sm' href="mailto:bellwines@email.com">Email Us</Link>
                 </Box>
 
