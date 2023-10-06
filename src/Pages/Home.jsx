@@ -18,7 +18,7 @@ export const Home = () => {
             <Container maxW="6xl" px={{ base: 6, md: 3 }} py={24}>
                 <Stack direction={{ base: 'column', md: 'row' }} justifyContent="center">
                     <Stack direction="column" spacing={6} justifyContent="center" maxW="480px">
-                        <Heading fontSize="2xl" lineHeight={1} fontWeight="bold" textAlign="left">
+                        <Heading fontSize="4xl" lineHeight={1} fontWeight="bold" textAlign="left">
                             Life elevated<br />
                             <Text color="blue.600">at Bellwines</Text>
                         </Heading>
@@ -253,7 +253,7 @@ export const Home = () => {
         </>
     )
 }
-//
 
+//good alternate Hero Image! 
 // src = {`https://ethereum.org/static/28214bb68eb5445dcb063a72535bc90c/9019e/hero.webp`}
 
